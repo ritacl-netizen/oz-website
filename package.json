@@ -1,0 +1,57 @@
+{
+  "name": "el-secreto-ciudad-esmeralda",
+  "version": "1.0.0",
+  "description": "Website oficial para el musical 'El Secreto de la Ciudad Esmeralda' por Ophelias - Compañía de Teatro",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve . --live",
+    "build": "echo 'Static website - no build process needed'",
+    "deploy": "gh-pages -d .",
+    "lint:css": "stylelint css/*.css",
+    "lint:html": "htmlhint *.html",
+    "optimize:images": "imagemin images/* --out-dir=images/optimized",
+    "validate": "html-validator --file=index.html",
+    "lighthouse": "lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html",
+    "sitemap": "sitemap-generator https://oselmusical.com --filepath=./sitemap.xml"
+  },
+  "keywords": [
+    "musical",
+    "teatro",
+    "infantil",
+    "steampunk",
+    "oz",
+    "montevideo",
+    "uruguay",
+    "ophelias",
+    "ciudad-esmeralda"
+  ],
+  "author": {
+    "name": "Ophelias - Compañía de Teatro",
+    "email": "info@ophelias.com.uy"
+  },
+  "license": "MIT",
+  "homepage": "https://oselmusical.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ophelias/oz-musical-website.git"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1",
+    "gh-pages": "^6.1.1",
+    "htmlhint": "^1.1.4",
+    "stylelint": "^16.2.1",
+    "lighthouse": "^11.6.0",
+    "html-validator": "^6.0.1",
+    "imagemin": "^8.0.1",
+    "sitemap-generator": "^8.5.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

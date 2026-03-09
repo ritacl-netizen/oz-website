@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página No Encontrada - El Secreto de la Ciudad Esmeralda</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --emerald-primary: #2d5f3f;
+            --emerald-glow: #50c878;
+            --gold: #d4af37;
+            --dark-bg: #1a1a1a;
+            --text-light: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d5f3f 50%, #1a1a1a 100%);
+            color: var(--text-light);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .error-code {
+            font-family: 'Cinzel', serif;
+            font-size: 8rem;
+            font-weight: 700;
+            color: var(--emerald-glow);
+            text-shadow: 0 0 30px rgba(80, 200, 120, 0.5);
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        .error-message {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #2d5f3f 0%, #50c878 100%);
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(45, 95, 63, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(45, 95, 63, 0.6);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--emerald-glow);
+            border: 2px solid var(--emerald-glow);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--emerald-glow);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+        
+        .gears {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.1;
+            overflow: hidden;
+        }
+        
+        .gear {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--emerald-glow);
+            border-radius: 50%;
+            animation: rotate 15s linear infinite;
+        }
+        
+        .gear::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            background: var(--emerald-glow);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .gear-1 {
+            top: 20%;
+            left: 10%;
+            animation-duration: 12s;
+        }
+        
+        .gear-2 {
+            top: 60%;
+            right: 15%;
+            animation-duration: 18s;
+            animation-direction: reverse;
+        }
+        
+        .gear-3 {
+            bottom: 20%;
+            left: 20%;
+            animation-duration: 15s;
+        }
+        
+        .gear-4 {
+            top: 30%;
+            right: 30%;
+            animation-duration: 20s;
+            animation-direction: reverse;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gears">
+        <div class="gear gear-1"></div>
+        <div class="gear gear-2"></div>
+        <div class="gear gear-3"></div>
+        <div class="gear gear-4"></div>
+    </div>
+    
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-title">¡Te has perdido en la Ciudad Esmeralda!</h1>
+        <p class="error-message">
+            Parece que esta página se ha extraviado en los engranajes mágicos de nuestra ciudad steampunk. 
+            Pero no te preocupes, ¡podemos ayudarte a encontrar el camino de vuelta!
+        </p>
+        
+        <div class="error-actions">
+            <a href="/" class="btn btn-primary">
+                <i class="fas fa-home icon"></i>
+                Volver al Inicio
+            </a>
+            <a href="javascript:history.back()" class="btn btn-secondary">
+                <i class="fas fa-arrow-left icon"></i>
+                Página Anterior
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // Add some sparkle effect
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'absolute';
+            sparkle.style.left = Math.random() * window.innerWidth + 'px';
+            sparkle.style.top = Math.random() * window.innerHeight + 'px';
+            sparkle.style.color = '#50c878';
+            sparkle.style.fontSize = '1rem';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.animation = 'sparkleFloat 3s ease-out forwards';
+            sparkle.style.zIndex = '1000';
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                if (sparkle.parentElement) {
+                    sparkle.remove();
+                }
+            }, 3000);
+        }
+        
+        // Add sparkle animation
+        const sparkleStyle = document.createElement('style');
+        sparkleStyle.textContent = `
+            @keyframes sparkleFloat {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0) rotate(0deg);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-50px) rotate(360deg);
+                }
+            }
+        `;
+        document.head.appendChild(sparkleStyle);
+        
+        // Create sparkles periodically
+        setInterval(createSparkle, 2000);
+        
+        // Initial sparkles
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createSparkle, i * 400);
+        }
+    </script>
+</body>
+</html>
