@@ -51,7 +51,7 @@
     <!-- ═══════════════════════════════════════════ -->
     <!-- HERO — Full viewport, dramatic, single CTA -->
     <!-- ═══════════════════════════════════════════ -->
-    <section id="inicio" class="hero" style="background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('images/hero-oz.png') center/cover no-repeat;">
+    <section id="inicio" class="hero" id="heroSection">
 
         <div class="hero-content">
             <p class="hero-pre">De los creadores de <em>Alicia</em> y <em>Peter Pan</em></p>
@@ -383,6 +383,17 @@
         </div>
     </footer>
 
+    <script>
+    // Hero background rotation - random on each page load
+    (function() {
+        var heroes = ['images/hero-new-b.png', 'images/hero-new-c.png', 'images/hero-new-d.png'];
+        var pick = heroes[Math.floor(Math.random() * heroes.length)];
+        var hero = document.querySelector('.hero');
+        if (hero) {
+            hero.style.background = "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('" + pick + "') center/cover no-repeat";
+        }
+    })();
+    </script>
     <script src="js/script.js"></script>
 </body>
 </html>
