@@ -133,8 +133,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 }
 .nav-cta:hover { background: #e0c04a; }
 /* Mobile entradas button — visible only on mobile, next to hamburger */
+.nav-right-mobile { display: none; align-items: center; gap: 12px; }
 .nav-cta-mobile {
-    display: none;
     background: var(--gold);
     color: #0a0a0a;
     padding: 6px 14px;
@@ -145,7 +145,6 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     font-size: .65rem;
     letter-spacing: .08em;
     text-transform: uppercase;
-    margin-right: 12px;
 }
 .nav-toggle { display: none; flex-direction: column; cursor: pointer; }
 .bar { width: 24px; height: 2px; background: #fff; margin: 3px 0; transition: .3s; }
@@ -787,7 +786,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     .nav-menu.active { left: 0; }
     .nav-toggle { display: flex; }
     .nav-cta { display: none; }
-    .nav-cta-mobile { display: inline-block; }
+    .nav-right-mobile { display: flex; }
+    .nav-toggle { display: flex !important; }
     .discover { display: none; }
     .nav-toggle.active .bar:nth-child(2) { opacity: 0; }
     .nav-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
