@@ -78,3 +78,9 @@ analytics.js
 *.key
 *.pem
 generate_*.py
+
+# Security
+ophelias-env.sh
+*.env*
+.env
+.env.*
