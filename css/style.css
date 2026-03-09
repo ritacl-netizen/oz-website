@@ -133,7 +133,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 }
 .nav-cta:hover { background: #e0c04a; }
 /* Mobile entradas button — visible only on mobile, next to hamburger */
-.nav-right-mobile { display: none; align-items: center; gap: 12px; }
+.nav-right-mobile { display: none; flex-direction: row; align-items: center; gap: 12px; }
 .nav-cta-mobile {
     background: var(--gold);
     color: #0a0a0a;
@@ -784,10 +784,9 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
         border-top: 1px solid var(--border);
     }
     .nav-menu.active { left: 0; }
-    .nav-toggle { display: flex; }
     .nav-cta { display: none; }
     .nav-right-mobile { display: flex; }
-    .nav-toggle { display: flex !important; }
+    .nav-right-mobile .nav-toggle { display: flex; }
     .discover { display: none; }
     .nav-toggle.active .bar:nth-child(2) { opacity: 0; }
     .nav-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
