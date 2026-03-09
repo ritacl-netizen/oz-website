@@ -766,7 +766,11 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     .award-divider { width: 60px; height: 1px; }
 }
 
+/* Mobile break for hero subtitle */
+.mobile-break { display: none; }
+
 @media (max-width: 768px) {
+    .mobile-break { display: inline; }
     .footer-brand { text-align: center; }
     .footer-venue-logos { justify-content: center !important; }
     .nav-menu {
