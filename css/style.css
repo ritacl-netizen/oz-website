@@ -512,7 +512,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 
 /* === TEAM === */
 .team {
-    padding: 5rem 0;
+    padding: 2.5rem 0 5rem;
     background: var(--dark-bg);
 }
 .team-grid {
