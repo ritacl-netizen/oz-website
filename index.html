@@ -54,7 +54,7 @@
     <!-- ═══════════════════════════════════════════ -->
     <!-- HERO — Full viewport, dramatic, single CTA -->
     <!-- ═══════════════════════════════════════════ -->
-    <section id="inicio" class="hero" id="heroSection">
+    <section id="inicio" class="hero">
 
         <div class="hero-content">
             <p class="hero-pre">De los creadores de<br class="mobile-break"> <em>Alicia</em> y <em>Peter Pan</em></p>
@@ -205,8 +205,8 @@
                     <p>Para toda la familia</p>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 2.5rem;">
-                <a href="#" class="btn btn-hero" style="font-size: 1.1rem; padding: 1rem 3rem;">Próximamente</a>
+            <div class="functions-cta">
+                <a href="#" class="btn btn-hero">Próximamente</a>
             </div>
         </div>
     </section>
@@ -279,7 +279,7 @@
             </div>
 
             <!-- Equipo Creativo -->
-            <h2 class="section-title" style="margin-top: 4rem;">Equipo Creativo</h2>
+            <h2 class="section-title section-title--spaced">Equipo Creativo</h2>
             <div class="team-grid">
                 <div class="team-member">
                     <img src="images/elenco/nicolas-amorin.jpg" alt="Nicolás Amorín" loading="lazy">
@@ -327,7 +327,7 @@
     <div class="producer-section">
         <div class="producer-box">
             <h2 class="section-title">Sobre la Productora</h2>
-            <img src="images/premio-florencio-t.png" alt="Premio Florencio" style="float: right; height: 220px; margin: 0 0 1rem 2rem; border-radius: 12px; ">
+            <img src="images/premio-florencio-t.png" alt="Premio Florencio" class="producer-florencio">
             <p>
                 La productora apuesta por llevar el arte del teatro a nuevos niveles en Uruguay, invirtiendo en 
                 espectáculos de altísima calidad artística y técnica. Su misión es crear experiencias inolvidables 
@@ -336,17 +336,17 @@
                 la imaginación del espectador sea la gran protagonista. Porque cuando la calidad se une con la pasión, 
                 el teatro se convierte en magia.
             </p>
-            <div style="clear: both;"></div>
+            <div class="clearfix"></div>
         </div>
         <!-- Sponsors -->
-        <div class="sponsors" style="max-width: 800px; margin: 2.5rem auto 0; text-align: center;">
-            <p style="color: rgba(255,255,255,0.5); font-style: italic; margin-bottom: 1rem;">Con el apoyo de</p>
-            <div style="display: flex; gap: 2rem; justify-content: center; align-items: center; flex-wrap: wrap;">
-                <img src="images/sponsor-1-t.png" alt="TCL" style="height: 65px; ">
-                <img src="images/sponsor-2-t.png" alt="Tienda Inglesa" style="height: 65px; ">
-                <img src="images/sponsor-3-t.png" alt="Mosca" style="height: 55px; ">
-                <img src="images/sponsor-4-t.png" alt="HOY Club de Beneficios" style="height: 50px; ">
-                <img src="images/sponsor-mcdonalds.png" alt="McDonald's" style="height: 60px; ">
+        <div class="sponsors">
+            <p class="sponsors-label">Con el apoyo de</p>
+            <div class="sponsors-logos">
+                <img src="images/sponsor-1-t.png" alt="TCL" class="sponsor-logo sponsor-logo--lg">
+                <img src="images/sponsor-2-t.png" alt="Tienda Inglesa" class="sponsor-logo sponsor-logo--lg">
+                <img src="images/sponsor-3-t.png" alt="Mosca" class="sponsor-logo sponsor-logo--md">
+                <img src="images/sponsor-4-t.png" alt="HOY Club de Beneficios" class="sponsor-logo sponsor-logo--sm">
+                <img src="images/sponsor-mcdonalds.png" alt="McDonald's" class="sponsor-logo sponsor-logo--lg">
             </div>
         </div>
     </div>
@@ -358,15 +358,15 @@
             <p class="section-subtitle" style="margin-bottom: 2rem;">La magia que ya creamos</p>
             <div class="shows-gallery">
                 <div class="show-card">
-                    <h3 style="color: var(--gold); font-family: 'Cinzel', serif; margin-bottom: 1rem;">Alicia en el País de las Maravillas</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Ganadora del Premio Florencio al Mejor Musical · 40 funciones · +22.000 espectadores</p>
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
-                        <img src="images/alicia-2.jpg" alt="Alicia El Musical" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px;">
-                        <img src="images/alicia-3.jpg" alt="Alicia El Musical" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px;">
-                        <img src="images/alicia-4.jpg" alt="Alicia El Musical" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px;">
-                        <img src="images/alicia-5.jpg" alt="Alicia El Musical" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px;">
-                        <img src="images/alicia-6.jpg" alt="Alicia El Musical" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px;">
-                        <img src="images/alicia-batalla.jpg" alt="Alicia El Musical" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px;">
+                    <h3 class="show-card-title">Alicia en el País de las Maravillas</h3>
+                    <p class="show-card-desc">Ganadora del Premio Florencio al Mejor Musical · 40 funciones · +22.000 espectadores</p>
+                    <div class="show-card-gallery">
+                        <img src="images/alicia-2.jpg" alt="Alicia El Musical">
+                        <img src="images/alicia-3.jpg" alt="Alicia El Musical">
+                        <img src="images/alicia-4.jpg" alt="Alicia El Musical">
+                        <img src="images/alicia-5.jpg" alt="Alicia El Musical">
+                        <img src="images/alicia-6.jpg" alt="Alicia El Musical">
+                        <img src="images/alicia-batalla.jpg" alt="Alicia El Musical">
                     </div>
                 </div>
             </div>
@@ -423,9 +423,9 @@
                 <div class="footer-brand">
                     <h3>Oz, el Secreto de la Ciudad Esmeralda</h3>
                     <p>Un musical inmersivo que llevará a toda la familia a una aventura extraordinaria.</p>
-                    <div class="footer-venue-logos" style="display: flex; gap: 1.5rem; align-items: center; margin-top: 1rem;">
-                        <img src="images/la-gaviota-logo.png" alt="La Gaviota" class="footer-logo" style="margin: 0;">
-                        <img src="images/ophelias-logo.png" alt="Teatro Stella d'Italia - 130 Años" class="footer-logo" style="margin: 0; filter: brightness(0) invert(1);">
+                    <div class="footer-venue-logos">
+                        <img src="images/la-gaviota-logo.png" alt="La Gaviota" class="footer-logo">
+                        <img src="images/ophelias-logo.png" alt="Teatro Stella d'Italia - 130 Años" class="footer-logo footer-logo--invert">
                     </div>
                 </div>
                 <div class="footer-links">
