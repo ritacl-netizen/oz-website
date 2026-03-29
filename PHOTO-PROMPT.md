@@ -3,10 +3,20 @@
 ## Method
 Use OpenAI `gpt-image-1` image edit API. Send original photo + prompt. Resize result to 400x600.
 
-## Prompt (working version — approved 2026-03-29)
+## Color Reference (Pantone)
+- **Dark background:** `#001A14` (near-black teal)
+- **Mid background:** `#0A3D2E` (dark teal-emerald) ← dominant tone
+- **Bright swirls:** up to `#1A6B4A` (luminous emerald)
+- **NOT pure green, lime, or forest green** — must be blue-toned teal
+
+## Prompt (working version — approved 2026-03-29 v3)
 
 ```
-Transform this portrait photo for a theater musical website. CRITICAL: preserve the person's exact facial features, mouth shape, expression, eye shape, nose, and skin tone from the original photo — do not alter them. Replace the background with a rich dark teal-emerald green background with prominent, luminous swirling magical patterns and sparkles. The green should have a teal/blue-green tone, not pure green. Change their clothing to the same teal-emerald green. Professional theatrical headshot with magical Oz / Emerald City theme. Keep the same pose and framing.
+Transform this portrait photo for a theater musical website. CRITICAL: preserve the person's exact facial features, mouth shape, expression, eye shape, nose, and skin tone from the original photo — do not alter them.
+
+BACKGROUND COLOR (must match exactly): Use a dark teal-emerald green background. The dominant background color must be hex #0A3D2E (dark teal-emerald), with darker edges around #001A14 and brighter swirl highlights up to #1A6B4A. Do NOT use pure green, lime green, or forest green — it must be a blue-toned teal emerald green.
+
+Add prominent, luminous swirling magical patterns and sparkles to the background. Change clothing to the same teal-emerald green tone. Professional theatrical headshot with magical Oz / Emerald City theme. Keep the same pose and framing.
 ```
 
 ## For Isabel Cleffi (Vestuario) — add this to prompt:
@@ -45,3 +55,4 @@ img.save(OUTPUT_PATH, 'JPEG', quality=92)
 - The face won't be 100% identical but preserves key features (approved by Nico)
 - Key: don't change the mouth from original expression
 - Swirls should be prominent and luminous (not subtle)
+- Hex colors in prompt help maintain consistency across all photos
