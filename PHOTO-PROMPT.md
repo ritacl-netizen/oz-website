@@ -6,7 +6,7 @@ Use OpenAI `gpt-image-1` image edit API. Send original photo + prompt. Resize re
 ## Prompt (working version — approved 2026-03-29)
 
 ```
-Transform this portrait photo for a theater musical website. CRITICAL: preserve the person's exact facial features, mouth shape, expression, eye shape, nose, and skin tone from the original photo — do not alter them. Replace the background with a rich emerald green background with prominent, luminous swirling magical patterns and sparkles. Change their clothing to emerald green. Professional theatrical headshot with magical Oz / Emerald City theme. Keep the same pose and framing.
+Transform this portrait photo for a theater musical website. CRITICAL: preserve the person's exact facial features, mouth shape, expression, eye shape, nose, and skin tone from the original photo — do not alter them. Replace the background with a rich dark teal-emerald green background with prominent, luminous swirling magical patterns and sparkles. The green should have a teal/blue-green tone, not pure green. Change their clothing to the same teal-emerald green. Professional theatrical headshot with magical Oz / Emerald City theme. Keep the same pose and framing.
 ```
 
 ## For Isabel Cleffi (Vestuario) — add this to prompt:
