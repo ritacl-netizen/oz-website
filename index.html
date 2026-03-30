@@ -14,7 +14,7 @@
     <meta property="og:url" content="https://ozelmusical.com/">
     <meta property="og:title" content="Oz, el Secreto de la Ciudad Esmeralda - El Musical">
     <meta property="og:description" content="De los creadores de Alicia y Peter Pan. Musical inmersivo para toda la familia. Montevideo 2026.">
-    <meta property="og:image" content="https://ozelmusical.com/images/hero-oz.png">
+    <meta property="og:image" content="https://ozelmusical.com/images/hero-oz.jpg">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -500,13 +500,11 @@
     </footer>
 
     <script>
-    // Hero background rotation - random on each page load
+    // Hero background
     (function() {
-        var heroes = ['images/hero-new-b.png', 'images/hero-new-c.png', 'images/hero-new-d.png'];
-        var pick = heroes[Math.floor(Math.random() * heroes.length)];
         var hero = document.querySelector('.hero');
         if (hero) {
-            hero.style.background = "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('" + pick + "') center/cover no-repeat";
+            hero.style.background = "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('images/hero-new-b.jpg') center/cover no-repeat";
         }
     })();
     </script>
