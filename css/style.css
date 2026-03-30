@@ -25,7 +25,7 @@ body.loaded { opacity: 1; }
     --emerald-deep: #2d5f3f;
     --gold: #D4AF37;
     --copper: #b87333;
-    --dark-bg: #0a1a0f;
+    --dark-bg: #0f2518; /* anterior: #0a1a0f */
     --card-bg: rgba(16, 36, 22, 0.85);
     --border: rgba(80, 200, 120, 0.25);
     --text: #ffffff;
@@ -369,7 +369,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 /* === NEWSLETTER === */
 .newsletter {
     padding: 5rem 0;
-    background: linear-gradient(135deg, var(--dark-emerald) 0%, #0a1a0f 100%);
+    background: linear-gradient(135deg, var(--dark-emerald) 0%, var(--dark-bg) 100%);
 }
 .newsletter-box {
     max-width: 600px;
@@ -669,7 +669,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 
 /* === FOOTER === */
 .footer {
-    background: #060f09;
+    background: #0b1a11; /* footer: un toque más oscuro que --dark-bg */
     padding: 3.5rem 0 1.5rem;
     border-top: 1px solid var(--border);
 }
