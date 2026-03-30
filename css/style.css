@@ -517,7 +517,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 }
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1.25rem;
     margin: 3rem 0;
 }
@@ -528,6 +528,12 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     padding: 1.5rem;
     text-align: center;
     transition: all .3s;
+    overflow: hidden;
+}
+.team-member img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
 }
 .team-member:hover {
     border-color: var(--emerald);
