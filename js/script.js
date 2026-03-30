@@ -95,20 +95,6 @@ function showNotification(message, type = 'info') {
     n.className = `notification notification-${type}`;
     n.innerHTML = `<span>${message}</span><button onclick="this.parentElement.remove()">&times;</button>`;
     
-    if (!document.querySelector('#notif-css')) {
-        const s = document.createElement('style');
-        s.id = 'notif-css';
-        s.textContent = `
-            .notification { position:fixed; top:90px; right:20px; z-index:10000; padding:1rem 1.5rem;
-                border-radius:6px; display:flex; align-items:center; gap:1rem; color:#fff;
-                transform:translateX(120%); transition:transform .3s; max-width:420px; font-size:.95rem; }
-            .notification.show { transform:translateX(0); }
-            .notification-success { background:linear-gradient(135deg,#1a5c32,#2d5f3f); border:1px solid #50c878; }
-            .notification-error { background:linear-gradient(135deg,#8b1538,#a91d42); border:1px solid #ff4757; }
-            .notification button { background:none; border:none; color:#fff; font-size:1.3rem; cursor:pointer; padding:0 .25rem; }
-        `;
-        document.head.appendChild(s);
-    }
     document.body.appendChild(n);
     requestAnimationFrame(() => requestAnimationFrame(() => n.classList.add('show')));
     setTimeout(() => { n.classList.remove('show'); setTimeout(() => n.remove(), 300); }, 4500);
