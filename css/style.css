@@ -513,7 +513,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     text-align: center;
     transition: all .3s;
 }
-.cast-member img {
+.cast-member img,
+.cast-member video {
     width: 100%;
     aspect-ratio: 2/3;
     object-fit: cover;
@@ -522,7 +523,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     border: 2px solid var(--border);
     transition: all .3s;
 }
-.cast-member:hover img {
+.cast-member:hover img,
+.cast-member:hover video {
     border-color: var(--emerald);
     transform: translateY(-3px);
     box-shadow: 0 8px 24px rgba(0, 200, 100, 0.2);
