@@ -615,6 +615,43 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     flex-direction: column;
     align-items: center;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-color: rgba(80, 200, 120, 0.3);
+}
+.contact-item--qr::before,
+.contact-item--qr::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px solid rgba(80, 200, 120, 0.12);
+    pointer-events: none;
+}
+.contact-item--qr::before {
+    top: -80px;
+    left: -80px;
+    width: 220px;
+    height: 220px;
+    border-width: 3px;
+    border-color: rgba(80, 200, 120, 0.1);
+    animation: swirl-slow 12s linear infinite;
+}
+.contact-item--qr::after {
+    bottom: -60px;
+    right: -60px;
+    width: 180px;
+    height: 180px;
+    border-color: rgba(80, 200, 120, 0.08);
+    animation: swirl-slow 15s linear infinite reverse;
+}
+@keyframes swirl-slow {
+    0% { transform: rotate(0deg); border-radius: 50% 40% 50% 60%; }
+    25% { border-radius: 40% 50% 60% 50%; }
+    50% { transform: rotate(180deg); border-radius: 50% 60% 40% 50%; }
+    75% { border-radius: 60% 50% 50% 40%; }
+    100% { transform: rotate(360deg); border-radius: 50% 40% 50% 60%; }
 }
 .qr-image {
     width: 150px;
