@@ -171,32 +171,12 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 }
 .hero-pre em { color: var(--emerald); font-style: normal; }
 .hero-title { margin-bottom: 1.5rem; line-height: 1; }
-.title-oz {
+.hero-logo {
     display: block;
-    font-size: clamp(5rem, 14vw, 10rem);
-    font-weight: 900;
-    color: var(--gold);
-    text-shadow: 0 0 60px rgba(212,175,55,0.4);
-    letter-spacing: .25em;
+    max-width: clamp(280px, 50vw, 600px);
+    height: auto;
+    margin: 0 auto;
     animation: fadeUp 1s ease .5s both;
-}
-.title-sub {
-    display: block;
-    font-size: clamp(1.1rem, 3vw, 1.8rem);
-    font-weight: 400;
-    color: var(--text-muted);
-    letter-spacing: .15em;
-    margin: .5rem 0;
-    animation: fadeUp 1s ease .7s both;
-}
-.title-emerald {
-    display: block;
-    font-size: clamp(1.8rem, 5vw, 3.5rem);
-    font-weight: 700;
-    color: var(--emerald);
-    text-shadow: 0 0 30px rgba(80,200,120,0.4);
-    letter-spacing: .1em;
-    animation: fadeUp 1s ease .9s both;
 }
 .hero-venue {
     font-size: 1rem;
