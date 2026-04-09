@@ -51,6 +51,9 @@ document.querySelectorAll(
     observer.observe(el);
 });
 
+// Animate section title dividers on scroll
+document.querySelectorAll('.section-title').forEach(el => observer.observe(el));
+
 // Forms → Google Apps Script proxy → Notion
 const FORMS_PROXY = 'https://script.google.com/macros/s/AKfycbyKtW3wO7OegF8G16XmT6x_nSG8RwkIu2t7uRwVlnG4M7xY_ukXGBHnYwfXOEKtJ8Jt/exec';
 
