@@ -129,4 +129,52 @@ function updateSteamElements() {
 window.addEventListener('scroll', updateSteamElements, { passive: true });
 updateSteamElements();
 
+// Floating particles in hero
+(function() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none';
+    hero.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    let w, h;
+    function resize() { w = canvas.width = hero.offsetWidth; h = canvas.height = hero.offsetHeight; }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const colors = [
+        'rgba(212,175,55,', // gold
+        'rgba(80,200,120,', // emerald
+        'rgba(255,255,255,' // white
+    ];
+    const particles = Array.from({length: 35}, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 0.3,
+        dy: -Math.random() * 0.4 - 0.1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        phase: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.01 + 0.005
+    }));
+
+    function draw() {
+        ctx.clearRect(0, 0, w, h);
+        const t = Date.now();
+        particles.forEach(p => {
+            const alpha = 0.3 + Math.sin(t * p.speed + p.phase) * 0.3;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = p.color + alpha + ')';
+            ctx.fill();
+            p.x += p.dx;
+            p.y += p.dy;
+            if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+            if (p.x < -10 || p.x > w + 10) p.x = Math.random() * w;
+        });
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
+
 console.log('🎭 Oz, el Secreto de la Ciudad Esmeralda — loaded');
