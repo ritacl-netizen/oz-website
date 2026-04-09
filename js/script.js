@@ -155,7 +155,7 @@ updateSteamElements();
         dy: -Math.random() * 0.4 - 0.1,
         color: colors[Math.floor(Math.random() * colors.length)],
         phase: Math.random() * Math.PI * 2,
-        speed: Math.random() * 0.01 + 0.005
+        speed: Math.random() * 0.002 + 0.001
     }));
 
     function draw() {
