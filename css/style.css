@@ -448,10 +448,11 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 /* === FUNCTIONS === */
 .functions {
     padding: 5rem 0;
-    background: linear-gradient(180deg, #050505 0%, #0a120d 50%, #050505 100%);
+    background: linear-gradient(180deg, #050505 0%, #0d1a12 50%, #050505 100%);
     position: relative;
-    border-top: 1px solid rgba(80,200,120,0.12);
-    border-bottom: 1px solid rgba(80,200,120,0.12);
+    border-top: 1px solid rgba(80,200,120,0.15);
+    border-bottom: 1px solid rgba(80,200,120,0.15);
+    overflow: hidden;
 }
 
 .section-title {

@@ -132,25 +132,20 @@ function updateSteamElements() {
 window.addEventListener('scroll', updateSteamElements, { passive: true });
 updateSteamElements();
 
-// Floating particles in hero
-(function() {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
+// Floating particles — reusable
+function addParticles(container, count) {
+    if (!container) return;
     const canvas = document.createElement('canvas');
     canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none';
-    hero.appendChild(canvas);
+    container.appendChild(canvas);
     const ctx = canvas.getContext('2d');
     let w, h;
-    function resize() { w = canvas.width = hero.offsetWidth; h = canvas.height = hero.offsetHeight; }
+    function resize() { w = canvas.width = container.offsetWidth; h = canvas.height = container.offsetHeight; }
     resize();
     window.addEventListener('resize', resize);
 
-    const colors = [
-        'rgba(212,175,55,', // gold
-        'rgba(80,200,120,', // emerald
-        'rgba(255,255,255,' // white
-    ];
-    const particles = Array.from({length: 35}, () => ({
+    const colors = ['rgba(212,175,55,', 'rgba(80,200,120,', 'rgba(255,255,255,'];
+    const particles = Array.from({length: count}, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
         r: Math.random() * 2 + 1,
@@ -178,6 +173,8 @@ updateSteamElements();
         requestAnimationFrame(draw);
     }
     draw();
-})();
+}
+addParticles(document.querySelector('.hero'), 35);
+addParticles(document.querySelector('.functions'), 20);
 
 console.log('🎭 Oz, el Secreto de la Ciudad Esmeralda — loaded');
