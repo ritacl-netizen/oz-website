@@ -172,13 +172,18 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 .hero-title { margin-bottom: 1.5rem; line-height: 1; }
 .hero-logo {
     display: block;
-    max-width: clamp(240px, 50vw, 530px);
-    max-height: 44vh;
     width: auto;
     height: auto;
     object-fit: contain;
     margin: 0 auto;
+}
+.hero-logo-oz {
+    max-width: clamp(265px, 55vw, 585px);
     animation: fadeUp 1s ease .5s both;
+}
+.hero-logo-sub {
+    max-width: clamp(240px, 50vw, 530px);
+    animation: fadeUp 1s ease .8s both;
 }
 .hero-venue {
     font-size: 1rem;
