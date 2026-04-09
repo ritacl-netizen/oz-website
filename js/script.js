@@ -6,7 +6,7 @@ const navbar = document.getElementById('navbar');
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
-const newsletterForm = document.getElementById('newsletter-form');
+const newsletterForm = document.getElementById('newsletter-form'); // may be null
 
 // Mobile nav
 navToggle.addEventListener('click', () => {
@@ -64,32 +64,34 @@ function isBot(form) {
 }
 
 // Newsletter form
-newsletterForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    if (isBot(newsletterForm)) return;
-    const email = newsletterForm.querySelector('input[type="email"]').value;
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showNotification('Por favor ingresá un email válido', 'error');
-        return;
-    }
-    const btn = newsletterForm.querySelector('button');
-    btn.textContent = 'Suscribiendo...';
-    btn.disabled = true;
-    
-    fetch(FORMS_PROXY, {
-        method: 'POST',
-        body: JSON.stringify({ type: 'newsletter', email })
-    }).then(r => {
-        if (!r.ok) throw new Error('fail');
-        showNotification('¡Gracias! Te avisaremos cuando salgan las entradas.', 'success');
-        newsletterForm.reset();
-    }).catch(() => {
-        showNotification('Hubo un error. Intentá de nuevo.', 'error');
-    }).finally(() => {
-        btn.textContent = 'Suscribirme';
-        btn.disabled = false;
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (isBot(newsletterForm)) return;
+        const email = newsletterForm.querySelector('input[type="email"]').value;
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showNotification('Por favor ingresá un email válido', 'error');
+            return;
+        }
+        const btn = newsletterForm.querySelector('button');
+        btn.textContent = 'Suscribiendo...';
+        btn.disabled = true;
+
+        fetch(FORMS_PROXY, {
+            method: 'POST',
+            body: JSON.stringify({ type: 'newsletter', email })
+        }).then(r => {
+            if (!r.ok) throw new Error('fail');
+            showNotification('¡Gracias! Te avisaremos cuando salgan las entradas.', 'success');
+            newsletterForm.reset();
+        }).catch(() => {
+            showNotification('Hubo un error. Intentá de nuevo.', 'error');
+        }).finally(() => {
+            btn.textContent = 'Suscribirme';
+            btn.disabled = false;
+        });
     });
-});
+}
 
 // Notification
 function showNotification(message, type = 'info') {
