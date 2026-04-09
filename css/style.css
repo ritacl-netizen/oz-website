@@ -98,14 +98,13 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     margin: 0 auto;
 }
 .nav-logo {
-    font-family: 'Cinzel', serif;
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--gold);
     text-decoration: none;
-    letter-spacing: .15em;
     display: flex;
     align-items: center;
+}
+.nav-logo-img {
+    height: 28px;
+    width: auto;
 }
 .nav-menu { display: flex; gap: 2rem; margin-left: auto; margin-right: 1.5rem; }
 .nav-link {
