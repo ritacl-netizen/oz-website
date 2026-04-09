@@ -302,7 +302,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 /* === STORY === */
 .story {
     padding: 6rem 0;
-    background: var(--dark-bg);
+    background: #080808;
 }
 .story-header {
     text-align: center;
@@ -393,19 +393,21 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 /* === NEWSLETTER === */
 .newsletter {
     padding: 5rem 0;
-    background: linear-gradient(135deg, #0a0a0a 0%, var(--dark-bg) 100%);
+    background: #080808;
     position: relative;
 }
-.newsletter::before {
+.newsletter::before,
+.newsletter::after {
     content: '';
     position: absolute;
-    top: 0;
     left: 10%;
     right: 10%;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--gold), var(--emerald), var(--gold), transparent);
     opacity: 0.4;
 }
+.newsletter::before { top: 0; }
+.newsletter::after { bottom: 0; }
 .newsletter-box {
     max-width: 600px;
     margin: 0 auto;
@@ -446,8 +448,10 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 /* === FUNCTIONS === */
 .functions {
     padding: 5rem 0;
-    background: linear-gradient(180deg, rgba(5,5,5,0.95) 0%, rgba(20,20,20,0.4) 50%, rgba(5,5,5,0.95) 100%);
+    background: linear-gradient(180deg, #050505 0%, #0a120d 50%, #050505 100%);
     position: relative;
+    border-top: 1px solid rgba(80,200,120,0.12);
+    border-bottom: 1px solid rgba(80,200,120,0.12);
 }
 
 .section-title {
@@ -643,7 +647,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 /* === CONTACT === */
 .contact {
     padding: 5rem 0;
-    background: var(--dark-bg);
+    background: #080808;
 }
 .contact-grid {
     display: grid;
@@ -828,9 +832,9 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 
 /* === FOOTER === */
 .footer {
-    background: #060f09;
+    background: #030303;
     padding: 3.5rem 0 1.5rem;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(212,175,55,0.15);
 }
 .footer-content {
     display: grid;
