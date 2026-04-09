@@ -553,21 +553,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 .cast-member {
     text-align: center;
     transition: all .3s;
-    position: relative;
-    overflow: hidden;
 }
-.cast-member::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(212,175,55,0.3), transparent 60%);
-    opacity: 0;
-    transition: opacity 0.5s;
-    z-index: 1;
-    border-radius: 12px;
-    pointer-events: none;
-}
-.cast-member:hover::before { opacity: 1; }
 .cast-member img,
 .cast-member video {
     width: 100%;
@@ -580,9 +566,9 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 }
 .cast-member:hover img,
 .cast-member:hover video {
-    border-color: var(--gold);
+    border-color: var(--emerald);
     transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(212,175,55,0.2);
+    box-shadow: 0 8px 24px rgba(0, 200, 100, 0.2);
 }
 .cast-member h3 {
     color: var(--text);
