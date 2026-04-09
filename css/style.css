@@ -173,8 +173,11 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 .hero-title { margin-bottom: 1.5rem; line-height: 1; }
 .hero-logo {
     display: block;
-    max-width: clamp(280px, 50vw, 600px);
+    max-width: clamp(220px, 45vw, 480px);
+    max-height: 40vh;
+    width: auto;
     height: auto;
+    object-fit: contain;
     margin: 0 auto;
     animation: fadeUp 1s ease .5s both;
 }
