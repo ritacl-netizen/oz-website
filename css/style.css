@@ -916,9 +916,11 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 
 /* Mobile break for hero subtitle */
 .mobile-break { display: none; }
+.desktop-sep { display: inline; }
 
 @media (max-width: 768px) {
     .mobile-break { display: inline; }
+    .desktop-sep { display: none; }
     .footer-brand { text-align: center; }
     .footer-venue-logos { justify-content: center !important; }
     .nav-menu {
