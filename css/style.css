@@ -367,6 +367,9 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     padding: 1.8rem 2rem;
     text-align: center;
     margin-top: .5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .strip-item {
     display: flex;
