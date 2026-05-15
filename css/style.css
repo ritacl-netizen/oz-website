@@ -344,10 +344,6 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     margin-bottom: 1.3rem;
 }
 .story-text strong { color: var(--text); }
-.story-text .story-lead {
-    font-size: 1.15rem;
-    color: rgba(255,255,255,0.9);
-}
 .story-text .story-closing {
     font-family: 'Cinzel', serif;
     font-style: italic;
