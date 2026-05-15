@@ -348,8 +348,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     font-family: 'Cinzel', serif;
     font-style: italic;
     color: var(--gold);
-    font-size: 1.15rem;
-    text-align: center;
+    font-size: 1.05rem;
+    text-align: left;
     margin-top: 1rem;
 }
 .story-image img {
