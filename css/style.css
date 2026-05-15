@@ -357,37 +357,33 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     border-radius: 8px;
     border: 1px solid var(--border);
 }
-.story-highlights {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+.story-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 1.5rem;
-}
-.highlight-item {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 2rem;
+    padding: 2rem 0;
     text-align: center;
-    transition: all .3s;
 }
-.highlight-item:hover {
-    border-color: var(--emerald);
-    transform: translateY(-4px);
+.strip-item {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
 }
-.highlight-item i {
-    font-size: 2rem;
-    color: var(--emerald);
-    margin-bottom: 1rem;
-    display: block;
-}
-.highlight-item h4 {
+.strip-item strong {
     color: var(--text);
-    margin-bottom: .5rem;
-    font-size: 1.1rem;
-}
-.highlight-item p {
-    color: var(--text-muted);
     font-size: .95rem;
+    letter-spacing: .05em;
+}
+.strip-item em {
+    color: var(--text-muted);
+    font-style: normal;
+    font-size: .8rem;
+}
+.strip-sep {
+    color: var(--border);
+    font-size: 1.2rem;
+    user-select: none;
 }
 
 /* === NEWSLETTER === */
@@ -905,7 +901,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     .discover-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
     .story-content { grid-template-columns: 1fr; }
     .story-image { order: -1; }
-    .story-highlights { grid-template-columns: 1fr; }
+    .story-strip { flex-direction: column; gap: .8rem; }
+    .strip-sep { display: none; }
     .functions-grid { grid-template-columns: repeat(2, 1fr); }
     .team-grid { grid-template-columns: repeat(3, 1fr); }
     .cast-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1062,8 +1059,6 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     font-size: 1.5rem;
 }
 .function-card { position: relative; }
-
-.highlight-item { position: relative; }
 
 /* Mobile: hide steam elements */
 @media (max-width: 1024px) {
