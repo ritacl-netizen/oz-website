@@ -240,14 +240,9 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     100% { opacity: 0.4; }
 }
 
-/* Logo glow */
+/* Logo entrance */
 .hero-logo-oz {
-    filter: drop-shadow(0 0 25px rgba(212,175,55,0.3));
-    animation: fadeUp 1s ease .5s both, logoGlow 3s ease-in-out 2s infinite alternate;
-}
-@keyframes logoGlow {
-    0% { filter: drop-shadow(0 0 20px rgba(212,175,55,0.2)); }
-    100% { filter: drop-shadow(0 0 40px rgba(212,175,55,0.4)) drop-shadow(0 0 80px rgba(80,200,120,0.15)); }
+    animation: fadeUp 1s ease .5s both;
 }
 
 /* === DISCOVER CARDS === */
