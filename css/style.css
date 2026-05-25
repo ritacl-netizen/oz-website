@@ -249,7 +249,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 
 /* === DISCOVER CARDS === */
 .discover {
-    padding: 0;
+    padding: clamp(2rem, 5vh, 4rem) 0 0;
     margin-top: 0;
     position: relative;
     z-index: 10;
