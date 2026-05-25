@@ -26,8 +26,8 @@
     <meta property="og:image" content="https://ozelmusical.com/images/hero-oz.jpg">
     
     <!-- Preload hero images for faster LCP -->
-    <link rel="preload" as="image" href="images/hero-oz-top.png">
-    <link rel="preload" as="image" href="images/hero-oz-sub.png">
+    <link rel="preload" as="image" href="images/hero-oz-completo.png">
+    <link rel="preload" as="image" href="images/hero-bg-emerald.png">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -45,16 +45,16 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#inicio" class="nav-logo"><img src="images/logo-oz-nav.png" alt="Oz" class="nav-logo-img"></a>
+            <a href="#inicio" class="nav-logo"><img src="images/logo-oz-nav-v2.png" alt="Oz" class="nav-logo-img"></a>
             <div class="nav-menu" id="nav-menu">
                 <a href="#inicio" class="nav-link">Inicio</a>
                 <a href="#descubrir" class="nav-link">Descubrir</a>
                 <a href="#equipo" class="nav-link">Equipo</a>
                 <a href="#contacto" class="nav-link">Contacto</a>
             </div>
-            <a href="#entradas" class="nav-cta" onclick="gtag('event','click_entradas',{location:'navbar'})">Próximamente</a>
+            <a href="https://redtickets.uy/evento/OZ-El-Secreto-de-la-Ciudad-Esmeralda/29764/" target="_blank" rel="noopener" class="nav-cta" onclick="gtag('event','click_entradas',{location:'navbar'})">Entradas</a>
             <div class="nav-right-mobile">
-                <a href="#entradas" class="nav-cta-mobile" onclick="gtag('event','click_entradas',{location:'navbar_mobile'})">Entradas</a>
+                <a href="https://redtickets.uy/evento/OZ-El-Secreto-de-la-Ciudad-Esmeralda/29764/" target="_blank" rel="noopener" class="nav-cta-mobile" onclick="gtag('event','click_entradas',{location:'navbar_mobile'})">Entradas</a>
                 <div class="nav-toggle" id="nav-toggle">
                     <span class="bar"></span>
                     <span class="bar"></span>
@@ -72,12 +72,11 @@
         <div class="hero-content">
             <p class="hero-pre">De los creadores de<br class="mobile-break"> <em>Alicia</em> y <em>Peter Pan</em></p>
             <h1 class="hero-title">
-                <img src="images/hero-oz-top.png" alt="Oz" class="hero-logo hero-logo-oz">
-                <img src="images/hero-oz-sub.png" alt="el Secreto de la Ciudad Esmeralda" class="hero-logo hero-logo-sub">
+                <img src="images/hero-oz-completo.png" alt="Oz, el Secreto de la Ciudad Esmeralda" class="hero-logo hero-logo-oz">
             </h1>
             <p class="hero-venue">Vacaciones de Invierno<span class="desktop-sep"> · </span><br class="mobile-break">Teatro Stella · Montevideo</p>
             <p class="hero-date">Estreno 27 de Junio</p>
-            <a href="#entradas" class="btn btn-hero" id="entradas" onclick="gtag('event','click_entradas',{location:'hero'})">Próximamente</a>
+            <a href="https://redtickets.uy/evento/OZ-El-Secreto-de-la-Ciudad-Esmeralda/29764/" target="_blank" rel="noopener" class="btn btn-hero" onclick="gtag('event','click_entradas',{location:'hero'})">Entradas Aquí</a>
         </div>
         <div class="hero-scroll-hint">
             <i class="fas fa-chevron-down"></i>
@@ -173,7 +172,7 @@
                 <div class="function-card">
                     <i class="fas fa-calendar-alt"></i>
                     <h3>Fechas</h3>
-                    <p>Vacaciones de Invierno 2026</p>
+                    <p>Vacaciones de Invierno · 15hs</p>
                 </div>
                 <div class="function-card">
                     <i class="fas fa-map-marker-alt"></i>
@@ -192,7 +191,7 @@
                 </div>
             </div>
             <div class="functions-cta">
-                <a href="#" class="btn btn-hero" onclick="gtag('event','click_entradas',{location:'funciones'})">Próximamente</a>
+                <a href="https://redtickets.uy/evento/OZ-El-Secreto-de-la-Ciudad-Esmeralda/29764/" target="_blank" rel="noopener" class="btn btn-hero" onclick="gtag('event','click_entradas',{location:'funciones'})">Entradas Aquí</a>
             </div>
         </div>
     </section>
@@ -496,15 +495,6 @@
         </div>
     </footer>
 
-    <script>
-    // Hero background
-    (function() {
-        var hero = document.querySelector('.hero');
-        if (hero) {
-            hero.style.background = "#000";
-        }
-    })();
-    </script>
     <script src="js/script.js"></script>
 </body>
 </html>
