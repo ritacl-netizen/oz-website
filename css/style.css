@@ -1095,10 +1095,10 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 /* Sponsors */
 .sponsors { max-width: 800px; margin: 2.5rem auto 0; text-align: center; }
 .sponsors-label { color: rgba(255,255,255,0.5); font-style: italic; margin-bottom: 1rem; }
-.sponsors-logos { display: flex; gap: 2rem; justify-content: center; align-items: center; flex-wrap: wrap; }
-.sponsor-logo--lg { height: 65px; }
-.sponsor-logo--md { height: 55px; }
-.sponsor-logo--sm { height: 50px; }
+.sponsors-logos { display: flex; gap: 2.5rem; justify-content: center; align-items: center; flex-wrap: wrap; }
+.sponsor-logo { max-height: 70px; max-width: 160px; width: auto; height: auto; object-fit: contain; }
+.sponsor-logo--tcl { max-width: 136px; } /* -15% */
+.sponsor-logo--mcd { max-height: 63px; } /* -10% */
 
 /* Footer logos */
 .footer-venue-logos { display: flex; gap: 1.5rem; align-items: center; margin-top: 1rem; }
