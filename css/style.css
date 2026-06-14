@@ -274,7 +274,6 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 .filmstrip-track {
     display: flex;
     gap: 1.5rem;
-    animation: filmscroll 30s linear infinite;
     width: max-content;
     will-change: transform;
 }
@@ -283,11 +282,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     width: auto;
     border-radius: 8px;
     flex-shrink: 0;
-    filter: brightness(0.85);
-}
-@keyframes filmscroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-50% - 0.75rem)); }
+    mix-blend-mode: luminosity;
+    filter: brightness(0.9) contrast(1.1);
 }
 
 /* === DISCOVER CARDS === */

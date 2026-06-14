@@ -179,4 +179,20 @@ function addParticles(container, count) {
 addParticles(document.querySelector('.hero'), 35);
 addParticles(document.querySelector('.functions'), 20);
 
+// Filmstrip infinite scroll
+(function() {
+    const track = document.querySelector('.filmstrip-track');
+    if (!track) return;
+    let pos = 0;
+    const speed = 0.5;
+    function scroll() {
+        pos += speed;
+        const half = track.scrollWidth / 2;
+        if (pos >= half) pos = 0;
+        track.style.transform = 'translateX(-' + pos + 'px)';
+        requestAnimationFrame(scroll);
+    }
+    requestAnimationFrame(scroll);
+})();
+
 console.log('🎭 Oz, el Secreto de la Ciudad Esmeralda — loaded');
