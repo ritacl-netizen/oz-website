@@ -247,6 +247,48 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     animation: fadeUp 1s ease .5s both;
 }
 
+/* === CAST FILMSTRIP === */
+.filmstrip {
+    overflow: hidden;
+    position: relative;
+    padding: 2rem 0;
+}
+.filmstrip::before,
+.filmstrip::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    z-index: 2;
+    pointer-events: none;
+}
+.filmstrip::before {
+    left: 0;
+    background: linear-gradient(to right, var(--dark-bg) 0%, transparent 100%);
+}
+.filmstrip::after {
+    right: 0;
+    background: linear-gradient(to left, var(--dark-bg) 0%, transparent 100%);
+}
+.filmstrip-track {
+    display: flex;
+    gap: 1.5rem;
+    animation: filmscroll 35s linear infinite;
+    width: max-content;
+}
+.filmstrip-track img {
+    height: 400px;
+    width: auto;
+    border-radius: 8px;
+    flex-shrink: 0;
+    filter: brightness(0.85);
+}
+@keyframes filmscroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
 /* === DISCOVER CARDS === */
 .discover {
     padding: clamp(2rem, 5vh, 4rem) 0 0;
