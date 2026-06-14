@@ -282,8 +282,6 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     width: auto;
     border-radius: 8px;
     flex-shrink: 0;
-    mix-blend-mode: luminosity;
-    filter: brightness(0.9) contrast(1.1);
 }
 
 /* === DISCOVER CARDS === */

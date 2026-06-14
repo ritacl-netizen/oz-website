@@ -179,16 +179,38 @@ function addParticles(container, count) {
 addParticles(document.querySelector('.hero'), 35);
 addParticles(document.querySelector('.functions'), 20);
 
-// Filmstrip infinite scroll
+// Filmstrip infinite scroll with touch drag
 (function() {
     const track = document.querySelector('.filmstrip-track');
     if (!track) return;
     let pos = 0;
-    const speed = 0.25;
+    const baseSpeed = 0.25;
+    let dragging = false;
+    let startX = 0;
+    let dragOffset = 0;
+
+    track.parentElement.addEventListener('touchstart', function(e) {
+        dragging = true;
+        startX = e.touches[0].clientX;
+        dragOffset = 0;
+    }, { passive: true });
+
+    track.parentElement.addEventListener('touchmove', function(e) {
+        if (!dragging) return;
+        dragOffset = startX - e.touches[0].clientX;
+        startX = e.touches[0].clientX;
+        pos += dragOffset;
+    }, { passive: true });
+
+    track.parentElement.addEventListener('touchend', function() {
+        dragging = false;
+    });
+
     function scroll() {
-        pos += speed;
-        const half = track.scrollWidth / 2;
-        if (pos >= half) pos = 0;
+        if (!dragging) pos += baseSpeed;
+        var half = track.scrollWidth / 2;
+        if (pos >= half) pos -= half;
+        if (pos < 0) pos += half;
         track.style.transform = 'translateX(-' + pos + 'px)';
         requestAnimationFrame(scroll);
     }
