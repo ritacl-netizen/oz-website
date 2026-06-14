@@ -184,7 +184,7 @@ addParticles(document.querySelector('.functions'), 20);
     const track = document.querySelector('.filmstrip-track');
     if (!track) return;
     let pos = 0;
-    const speed = 0.5;
+    const speed = 0.25;
     function scroll() {
         pos += speed;
         const half = track.scrollWidth / 2;
