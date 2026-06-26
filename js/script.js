@@ -179,30 +179,47 @@ function addParticles(container, count) {
 addParticles(document.querySelector('.hero'), 35);
 addParticles(document.querySelector('.functions'), 20);
 
-// Filmstrip infinite scroll with touch drag
+// Filmstrip infinite scroll with touch drag + randomized order
 (function() {
+    const filmstrip = document.querySelector('.filmstrip');
     const track = document.querySelector('.filmstrip-track');
-    if (!track) return;
+    if (!track || !filmstrip) return;
+
+    // Build randomized photo list
+    const photos = filmstrip.dataset.castPhotos.split(',');
+    function shuffle(arr) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+    const order = shuffle(photos);
+    // Duplicate for seamless loop
+    const all = order.concat(order);
+    track.innerHTML = all.map(p => `<img src="images/${p}.jpg" alt="Elenco Oz">`).join('');
+
     let pos = 0;
     const baseSpeed = 0.25;
     let dragging = false;
     let startX = 0;
     let dragOffset = 0;
 
-    track.parentElement.addEventListener('touchstart', function(e) {
+    filmstrip.addEventListener('touchstart', function(e) {
         dragging = true;
         startX = e.touches[0].clientX;
         dragOffset = 0;
     }, { passive: true });
 
-    track.parentElement.addEventListener('touchmove', function(e) {
+    filmstrip.addEventListener('touchmove', function(e) {
         if (!dragging) return;
         dragOffset = startX - e.touches[0].clientX;
         startX = e.touches[0].clientX;
         pos += dragOffset;
     }, { passive: true });
 
-    track.parentElement.addEventListener('touchend', function() {
+    filmstrip.addEventListener('touchend', function() {
         dragging = false;
     });
 
