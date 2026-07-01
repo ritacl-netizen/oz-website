@@ -286,7 +286,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 
 /* === TRAILER SECTION === */
 .trailer {
-    padding: clamp(3rem, 6vh, 5rem) 0 clamp(1rem, 2vh, 2rem);
+    padding: clamp(1.5rem, 3vh, 2.5rem) 0 clamp(1rem, 2vh, 2rem);
     position: relative;
     z-index: 5;
 }
