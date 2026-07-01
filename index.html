@@ -41,7 +41,7 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css?v=20260626b">
+    <link rel="stylesheet" href="css/style.css?v=20260701a">
 </head>
 <body>
     <!-- Navigation -->
@@ -117,10 +117,12 @@
         <div class="container">
             <h2 class="section-title">Mirá el Trailer</h2>
             <div class="trailer-wrapper">
-                <div class="trailer-lite" data-video-id="wJg3jTEbKdA" role="button" tabindex="0" aria-label="Reproducir trailer">
-                    <img src="https://img.youtube.com/vi/wJg3jTEbKdA/maxresdefault.jpg" alt="Trailer Oz, el Secreto de la Ciudad Esmeralda" loading="lazy">
-                    <button class="trailer-play" aria-label="Play"><i class="fas fa-play"></i></button>
-                </div>
+                <video class="trailer-video" autoplay muted loop playsinline preload="metadata" poster="https://img.youtube.com/vi/wJg3jTEbKdA/maxresdefault.jpg">
+                    <source src="images/trailer.mp4" type="video/mp4">
+                </video>
+                <button class="trailer-sound" aria-label="Activar sonido" title="Activar sonido">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
             </div>
         </div>
     </section>

@@ -179,26 +179,37 @@ function addParticles(container, count) {
 addParticles(document.querySelector('.hero'), 35);
 addParticles(document.querySelector('.functions'), 20);
 
-// Trailer — lazy-load YouTube iframe on click
+// Trailer — sound toggle + view tracking
 (function() {
-    const lite = document.querySelector('.trailer-lite');
-    if (!lite) return;
-    function play() {
-        const id = lite.dataset.videoId;
-        if (typeof gtag === 'function') {
-            gtag('event', 'play_trailer', { location: 'trailer_section' });
+    const video = document.querySelector('.trailer-video');
+    const btn = document.querySelector('.trailer-sound');
+    if (!video || !btn) return;
+    const icon = btn.querySelector('i');
+    let unmuted = false;
+
+    btn.addEventListener('click', function() {
+        video.muted = !video.muted;
+        unmuted = !video.muted;
+        icon.className = video.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+        btn.setAttribute('aria-label', video.muted ? 'Activar sonido' : 'Silenciar');
+        if (unmuted && typeof gtag === 'function') {
+            gtag('event', 'trailer_unmute', { location: 'trailer_section' });
         }
-        const iframe = document.createElement('iframe');
-        iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1';
-        iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
-        iframe.allowFullscreen = true;
-        iframe.title = 'Trailer Oz';
-        lite.replaceWith(iframe);
-    }
-    lite.addEventListener('click', play);
-    lite.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
     });
+
+    // Track when trailer is scrolled into view (viewed)
+    let tracked = false;
+    const obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting && !tracked) {
+                tracked = true;
+                if (typeof gtag === 'function') {
+                    gtag('event', 'view_trailer', { location: 'trailer_section' });
+                }
+            }
+        });
+    }, { threshold: 0.5 });
+    obs.observe(video);
 })();
 
 // Filmstrip infinite scroll with touch drag + randomized order

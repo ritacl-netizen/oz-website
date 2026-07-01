@@ -300,55 +300,40 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     background: #000;
     position: relative;
 }
-.trailer-lite {
+.trailer-video {
     position: absolute;
     inset: 0;
-    cursor: pointer;
-    overflow: hidden;
-}
-.trailer-lite img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease, filter 0.3s ease;
-    filter: brightness(0.7);
+    display: block;
 }
-.trailer-lite:hover img {
-    transform: scale(1.03);
-    filter: brightness(0.85);
-}
-.trailer-play {
+.trailer-sound {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90px;
-    height: 90px;
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    background: var(--gold);
-    color: #0a0a0a;
-    font-size: 1.8rem;
-    border: none;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 6px;
-    box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
+    backdrop-filter: blur(4px);
+    z-index: 3;
 }
-.trailer-lite:hover .trailer-play {
-    transform: translate(-50%, -50%) scale(1.1);
-    box-shadow: 0 0 60px rgba(212, 175, 55, 0.8);
-}
-.trailer-wrapper iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    display: block;
+.trailer-sound:hover {
+    background: var(--gold);
+    color: #0a0a0a;
+    transform: scale(1.08);
 }
 @media (max-width: 768px) {
-    .trailer-play { width: 64px; height: 64px; font-size: 1.3rem; }
+    .trailer-sound { width: 40px; height: 40px; font-size: 0.85rem; bottom: 12px; right: 12px; }
 }
 
 /* === DISCOVER CARDS === */
