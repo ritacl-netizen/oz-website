@@ -286,7 +286,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 
 /* === TRAILER SECTION === */
 .trailer {
-    padding: clamp(3rem, 6vh, 5rem) 0;
+    padding: clamp(3rem, 6vh, 5rem) 0 clamp(1rem, 2vh, 2rem);
     position: relative;
     z-index: 5;
 }
@@ -396,7 +396,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 
 /* === STORY === */
 .story {
-    padding: 6rem 0;
+    padding: 3rem 0 6rem;
     background: #080808;
 }
 .story-header {
