@@ -179,6 +179,28 @@ function addParticles(container, count) {
 addParticles(document.querySelector('.hero'), 35);
 addParticles(document.querySelector('.functions'), 20);
 
+// Trailer — lazy-load YouTube iframe on click
+(function() {
+    const lite = document.querySelector('.trailer-lite');
+    if (!lite) return;
+    function play() {
+        const id = lite.dataset.videoId;
+        if (typeof gtag === 'function') {
+            gtag('event', 'play_trailer', { location: 'trailer_section' });
+        }
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1';
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+        iframe.allowFullscreen = true;
+        iframe.title = 'Trailer Oz';
+        lite.replaceWith(iframe);
+    }
+    lite.addEventListener('click', play);
+    lite.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+    });
+})();
+
 // Filmstrip infinite scroll with touch drag + randomized order
 (function() {
     const filmstrip = document.querySelector('.filmstrip');
