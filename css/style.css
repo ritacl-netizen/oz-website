@@ -207,13 +207,13 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 
 .hero-scroll-hint {
     position: absolute;
-    bottom: 2rem;
+    bottom: 1.75rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
     animation: bounce 2s infinite 2s;
-    color: var(--text-muted);
-    font-size: 1.2rem;
+    color: rgba(212, 175, 55, 0.75);
+    font-size: 1.8rem;
 }
 
 /* === HERO MAGIC PARTICLES === */
@@ -291,8 +291,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     z-index: 5;
 }
 .trailer-wrapper {
-    max-width: 960px;
-    margin: 2rem auto 0;
+    max-width: 100%;
+    margin: 0 auto;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.15);
