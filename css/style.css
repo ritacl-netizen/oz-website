@@ -65,6 +65,13 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     transform: translateY(-2px);
     box-shadow: 0 0 60px rgba(212,175,55,0.5);
 }
+.btn-hero--disabled {
+    background: rgba(212, 175, 55, 0.85);
+    color: #0a0a0a;
+    cursor: default;
+    pointer-events: none;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.25);
+}
 
 .btn-primary {
     background: var(--emerald);
