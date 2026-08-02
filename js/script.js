@@ -212,6 +212,29 @@ addParticles(document.querySelector('.functions'), 20);
     obs.observe(video);
 })();
 
+// La Magia — el reproductor de YouTube se carga recien al hacer click, asi el
+// video de como se hizo no pesa en la carga inicial de la pagina.
+(function() {
+    const lite = document.querySelector('.magia-lite');
+    if (!lite) return;
+
+    function play() {
+        const id = lite.dataset.videoId;
+        if (typeof gtag === 'function') gtag('event', 'play_making_of', { location: 'la_magia' });
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1';
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        iframe.allowFullscreen = true;
+        iframe.title = 'Cómo se hizo Oz, el Secreto de la Ciudad Esmeralda';
+        lite.replaceWith(iframe);
+    }
+
+    lite.addEventListener('click', play);
+    lite.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+    });
+})();
+
 // Filmstrip — carruseles infinitos con ventana deslizante, arrastre con inercia y lightbox.
 // Cada carrusel solo mantiene en el DOM las fotos visibles (+ un margen) y las recicla al
 // desplazarse, asi la cantidad total de fotos no afecta la memoria ni los datos descargados.
