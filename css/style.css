@@ -259,7 +259,12 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     overflow: hidden;
     position: relative;
     padding: 2rem 0;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
 }
+.filmstrip.is-dragging { cursor: grabbing; }
 .filmstrip::before,
 .filmstrip::after {
     content: '';
@@ -285,10 +290,89 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     will-change: transform;
 }
 .filmstrip-track img {
-    height: 400px;
+    height: clamp(230px, 34vw, 400px);
     width: auto;
     border-radius: 8px;
     flex-shrink: 0;
+    background: #111;
+    cursor: zoom-in;
+    transition: transform .35s ease, box-shadow .35s ease;
+}
+@media (hover: hover) {
+    .filmstrip-track img:hover {
+        transform: scale(1.03);
+        box-shadow: 0 12px 40px rgba(0,0,0,.6), 0 0 30px rgba(212,175,55,.2);
+    }
+}
+
+/* === LIGHTBOX === */
+body.lightbox-open { overflow: hidden; }
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 3.5rem 1rem;
+    background: rgba(3, 3, 3, .94);
+    backdrop-filter: blur(6px);
+}
+.lightbox.open { display: flex; animation: lightboxIn .25s ease both; }
+@keyframes lightboxIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.lightbox-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 30px 90px rgba(0,0,0,.8);
+}
+.lightbox-close,
+.lightbox-nav {
+    position: absolute;
+    background: rgba(0,0,0,.55);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .25s ease, color .25s ease, transform .2s ease;
+}
+.lightbox-close {
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 46px;
+    height: 46px;
+    font-size: 1.1rem;
+}
+.lightbox-nav {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 54px;
+    height: 54px;
+    font-size: 1.3rem;
+}
+.lightbox-prev { left: 1.2rem; }
+.lightbox-next { right: 1.2rem; }
+.lightbox-close:hover,
+.lightbox-nav:hover {
+    background: var(--gold);
+    color: #0a0a0a;
+}
+.lightbox-nav:hover { transform: translateY(-50%) scale(1.08); }
+@media (max-width: 768px) {
+    .lightbox { padding: 4rem .5rem; }
+    .lightbox-close { width: 40px; height: 40px; font-size: .95rem; top: .8rem; right: .8rem; }
+    .lightbox-nav { width: 42px; height: 42px; font-size: 1rem; }
+    .lightbox-prev { left: .5rem; }
+    .lightbox-next { right: .5rem; }
 }
 
 /* === TRAILER SECTION === */
