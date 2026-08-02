@@ -293,15 +293,39 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     }
 }
 
-/* === LA MAGIA — video de como se hizo === */
-.magia {
-    padding: clamp(3rem, 6vh, 5rem) 0;
-    position: relative;
-    z-index: 5;
+/* === PAGINA DE FOTOS === */
+.gallery-page {
+    padding: calc(70px + clamp(2rem, 6vh, 4rem)) 0 clamp(3rem, 8vh, 6rem);
+}
+.gallery-block { margin-top: clamp(2rem, 5vh, 3.5rem); }
+.gallery-heading {
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+.gallery-cta { text-align: center; margin-top: clamp(2rem, 5vh, 3.5rem); }
+.nav-link--active { color: var(--gold); }
+
+/* En la pagina de fotos el carrusel ocupa mucho mas alto */
+.filmstrip--large .filmstrip-track img {
+    height: clamp(300px, 58vh, 620px);
+}
+
+/* === VIDEO DE COMO SE CREO LA OBRA === */
+.producer-video-title {
+    margin-top: 3rem;
+    margin-bottom: 1.2rem;
+    color: var(--gold) !important;
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    letter-spacing: .1em;
+    text-transform: uppercase;
 }
 .magia-wrapper {
     max-width: 960px;
-    margin: 2.5rem auto 0;
+    margin: 0 auto;
     border-radius: 12px;
     overflow: hidden;
     aspect-ratio: 16 / 9;
