@@ -212,14 +212,15 @@ addParticles(document.querySelector('.functions'), 20);
     obs.observe(video);
 })();
 
-// Filmstrip — carrusel infinito con ventana deslizante, arrastre con inercia y lightbox.
-// Solo mantiene en el DOM las fotos visibles (+ un margen), asi la cantidad total de
-// fotos no afecta ni la memoria ni los datos que descarga el visitante.
+// Filmstrip — carruseles infinitos con ventana deslizante, arrastre con inercia y lightbox.
+// Cada carrusel solo mantiene en el DOM las fotos visibles (+ un margen) y las recicla al
+// desplazarse, asi la cantidad total de fotos no afecta la memoria ni los datos descargados.
+// Puede haber varios en la pagina; cada uno declara su grupo con data-photos.
 (function() {
-    const filmstrip = document.querySelector('.filmstrip');
-    const track = filmstrip && filmstrip.querySelector('.filmstrip-track');
-    const PHOTOS = window.CAST_PHOTOS || [];
-    if (!filmstrip || !track || !PHOTOS.length) return;
+    const SETS = {
+        cast: window.CAST_PHOTOS || [],
+        scenes: window.SCENE_PHOTOS || []
+    };
 
     const GAP = 24;             // debe coincidir con el gap del CSS
     const BUFFER = 600;         // px de fotos precargadas fuera de pantalla a cada lado
@@ -228,6 +229,7 @@ addParticles(document.querySelector('.functions'), 20);
     const TAP_SLOP = 8;         // px de movimiento que todavia cuentan como click
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let lightboxOpen = false;   // mientras esta abierto, todos los carruseles se frenan
 
     function shuffle(arr) {
         const a = arr.slice();
@@ -238,155 +240,11 @@ addParticles(document.querySelector('.functions'), 20);
         return a;
     }
 
-    // Mazo barajado: se reparte de a una foto y se vuelve a barajar al agotarse,
-    // asi nunca se repite una foto antes de haber pasado todas.
-    let deck = [];
-    function draw() {
-        if (!deck.length) deck = shuffle(PHOTOS);
-        return deck.pop();
+    function srcFor(photo, big) {
+        return 'images/' + photo.n + (big && photo.full ? '-full' : '') + '.jpg';
     }
 
-    let items = [];   // fotos vivas en el DOM, de izquierda a derecha
-    let origin = 0;   // coordenada virtual del borde izquierdo de items[0]
-    let pos = 0;      // cuanto se desplazo el carrusel, en coordenadas virtuales
-    let momentum = 0;
-    let paused = false;
-
-    function makeItem(photo) {
-        const img = document.createElement('img');
-        img.src = 'images/' + photo.n + '.jpg';
-        img.alt = 'Elenco de Oz, el Secreto de la Ciudad Esmeralda';
-        img.width = photo.w;      // reserva el espacio antes de que cargue
-        img.height = photo.h;
-        img.draggable = false;
-        img.dataset.photo = photo.n;
-        return { el: img, photo: photo, w: 0 };
-    }
-
-    function measure(item) {
-        // Los atributos width/height reservan la proporcion, asi que el ancho ya
-        // es correcto apenas se inserta, sin esperar a que baje la imagen.
-        item.w = item.el.getBoundingClientRect().width;
-        return item;
-    }
-
-    function totalWidth() {
-        return items.reduce((sum, it) => sum + it.w + GAP, 0);
-    }
-
-    function fill() {
-        const viewport = filmstrip.clientWidth;
-        // Agrega por la derecha hasta cubrir pantalla + margen
-        let guard = 0;
-        while (origin + totalWidth() < pos + viewport + BUFFER && guard++ < 50) {
-            const item = makeItem(draw());
-            track.appendChild(item.el);
-            items.push(measure(item));
-        }
-        // Agrega por la izquierda si el visitante arrastro hacia atras
-        guard = 0;
-        while (origin > pos - BUFFER && guard++ < 50) {
-            const item = makeItem(draw());
-            track.insertBefore(item.el, track.firstChild);
-            items.unshift(measure(item));
-            origin -= item.w + GAP;
-        }
-    }
-
-    function recycle() {
-        // Descarta las que ya salieron por la izquierda
-        while (items.length > 2 && origin + items[0].w + GAP <= pos - BUFFER) {
-            origin += items[0].w + GAP;
-            items.shift().el.remove();
-        }
-        // Descarta las que quedaron muy lejos por la derecha
-        const viewport = filmstrip.clientWidth;
-        while (items.length > 2 && origin + totalWidth() - (items[items.length - 1].w + GAP) > pos + viewport + BUFFER) {
-            items.pop().el.remove();
-        }
-    }
-
-    function render() {
-        track.style.transform = 'translate3d(' + -(pos - origin) + 'px,0,0)';
-    }
-
-    function frame() {
-        if (!dragging) {
-            // La pausa frena el avance automatico, pero deja que la inercia
-            // del ultimo arrastre termine de deslizarse suavemente.
-            const auto = (paused || reduceMotion) ? 0 : BASE_SPEED;
-            pos += auto + momentum;
-            momentum *= FRICTION;
-            if (Math.abs(momentum) < 0.05) momentum = 0;
-        }
-        fill();
-        recycle();
-        render();
-        requestAnimationFrame(frame);
-    }
-
-    // ── Arrastre con mouse y dedo ───────────────────────────────────────────
-    let dragging = false;
-    let lastX = 0;
-    let travelled = 0;
-    let lastMoveTime = 0;
-    let pressed = null;   // capturar el puntero re-dirige el pointerup al contenedor,
-                          // asi que guardamos aca la foto donde empezo el gesto
-
-    filmstrip.addEventListener('pointerdown', function(e) {
-        if (e.button !== undefined && e.button !== 0) return;
-        dragging = true;
-        travelled = 0;
-        momentum = 0;
-        lastX = e.clientX;
-        lastMoveTime = e.timeStamp;
-        pressed = e.target && e.target.dataset ? e.target.dataset.photo : null;
-        filmstrip.setPointerCapture(e.pointerId);
-        filmstrip.classList.add('is-dragging');
-    });
-
-    filmstrip.addEventListener('pointermove', function(e) {
-        if (!dragging) return;
-        const dx = lastX - e.clientX;
-        const dt = Math.max(1, e.timeStamp - lastMoveTime);
-        pos += dx;
-        travelled += Math.abs(dx);
-        momentum = dx / dt * 16;   // px por frame de 16ms
-        lastX = e.clientX;
-        lastMoveTime = e.timeStamp;
-    });
-
-    function endDrag(e) {
-        if (!dragging) return;
-        dragging = false;
-        filmstrip.classList.remove('is-dragging');
-        if (e && e.pointerId !== undefined && filmstrip.hasPointerCapture(e.pointerId)) {
-            filmstrip.releasePointerCapture(e.pointerId);
-        }
-        // Si apenas se movio, fue un click: abrir la foto
-        if (travelled < TAP_SLOP && pressed) openLightbox(pressed);
-        pressed = null;
-    }
-    filmstrip.addEventListener('pointerup', endDrag);
-    filmstrip.addEventListener('pointercancel', endDrag);
-
-    // Pausa al pasar el mouse por encima, para poder hacer click comodo
-    filmstrip.addEventListener('pointerenter', function(e) {
-        if (e.pointerType === 'mouse') paused = true;
-    });
-    filmstrip.addEventListener('pointerleave', function(e) {
-        if (e.pointerType === 'mouse') paused = false;
-    });
-
-    // Teclado: las fotos son navegables con Tab y se abren con Enter
-    filmstrip.addEventListener('keydown', function(e) {
-        if ((e.key === 'Enter' || e.key === ' ') && e.target.dataset.photo) {
-            e.preventDefault();
-            openLightbox(e.target.dataset.photo);
-        }
-    });
-
-    // ── Lightbox ────────────────────────────────────────────────────────────
+    // ── Lightbox compartido por todos los carruseles ────────────────────────
     let lb = null, lbImg = null, lbOrder = [], lbIndex = 0;
 
     function buildLightbox() {
@@ -394,11 +252,11 @@ addParticles(document.querySelector('.functions'), 20);
         lb.className = 'lightbox';
         lb.setAttribute('role', 'dialog');
         lb.setAttribute('aria-modal', 'true');
-        lb.setAttribute('aria-label', 'Foto del elenco');
+        lb.setAttribute('aria-label', 'Foto ampliada');
         lb.innerHTML =
             '<button class="lightbox-close" aria-label="Cerrar"><i class="fas fa-times"></i></button>' +
             '<button class="lightbox-nav lightbox-prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>' +
-            '<img class="lightbox-img" alt="Elenco de Oz, el Secreto de la Ciudad Esmeralda">' +
+            '<img class="lightbox-img" alt="Foto de Oz, el Secreto de la Ciudad Esmeralda">' +
             '<button class="lightbox-nav lightbox-next" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>';
         document.body.appendChild(lb);
         lbImg = lb.querySelector('.lightbox-img');
@@ -420,53 +278,187 @@ addParticles(document.querySelector('.functions'), 20);
         }, { passive: true });
     }
 
-    function srcFor(photo) {
-        return 'images/' + photo.n + (photo.full ? '-full' : '') + '.jpg';
-    }
-
     function show(i) {
         lbIndex = (i + lbOrder.length) % lbOrder.length;
-        const photo = lbOrder[lbIndex];
-        lbImg.src = srcFor(photo);
+        lbImg.src = srcFor(lbOrder[lbIndex], true);
         // Precarga las vecinas para que el cambio sea instantaneo
         [1, -1].forEach(function(d) {
             const p = lbOrder[(lbIndex + d + lbOrder.length) % lbOrder.length];
-            if (p) new Image().src = srcFor(p);
+            if (p) new Image().src = srcFor(p, true);
         });
     }
 
     function step(d) { show(lbIndex + d); }
 
-    function openLightbox(name) {
+    // Se navega dentro del mismo grupo que la foto tocada
+    function openLightbox(name, photos) {
         if (!lb) buildLightbox();
-        // Se navega sobre el orden completo, arrancando por la foto tocada
-        lbOrder = shuffle(PHOTOS);
+        lbOrder = shuffle(photos);
         const at = lbOrder.findIndex(function(p) { return p.n === name; });
         show(at >= 0 ? at : 0);
         lb.classList.add('open');
         document.body.classList.add('lightbox-open');
-        paused = true;
+        lightboxOpen = true;
         if (typeof gtag === 'function') gtag('event', 'open_cast_photo', { photo: name });
     }
 
     function closeLightbox() {
         lb.classList.remove('open');
         document.body.classList.remove('lightbox-open');
-        paused = false;
+        lightboxOpen = false;
     }
 
     document.addEventListener('keydown', function(e) {
-        if (!lb || !lb.classList.contains('open')) return;
+        if (!lightboxOpen) return;
         if (e.key === 'Escape') closeLightbox();
         else if (e.key === 'ArrowRight') step(1);
         else if (e.key === 'ArrowLeft') step(-1);
     });
 
-    window.addEventListener('resize', function() {
-        items.forEach(measure);
-    });
+    // ── Un carrusel ─────────────────────────────────────────────────────────
+    function initFilmstrip(filmstrip) {
+        const track = filmstrip.querySelector('.filmstrip-track');
+        const photos = SETS[filmstrip.dataset.photos] || [];
+        if (!track || !photos.length) return;
 
-    requestAnimationFrame(frame);
+        // Mazo barajado: reparte de a una foto y se rebaraja al agotarse, asi
+        // nunca repite una foto antes de haber pasado por todas.
+        let deck = [];
+        function draw() {
+            if (!deck.length) deck = shuffle(photos);
+            return deck.pop();
+        }
+
+        let items = [];   // fotos vivas en el DOM, de izquierda a derecha
+        let origin = 0;   // coordenada virtual del borde izquierdo de items[0]
+        let pos = 0;      // cuanto se desplazo el carrusel, en coordenadas virtuales
+        let momentum = 0;
+        let hovering = false;
+
+        function makeItem(photo) {
+            const img = document.createElement('img');
+            img.src = srcFor(photo, false);
+            img.alt = 'Foto de Oz, el Secreto de la Ciudad Esmeralda';
+            img.width = photo.w;      // reserva el espacio antes de que cargue
+            img.height = photo.h;
+            img.draggable = false;
+            img.dataset.photo = photo.n;
+            return { el: img, w: 0 };
+        }
+
+        // Los atributos width/height reservan la proporcion, asi que el ancho ya
+        // es correcto apenas se inserta, sin esperar a que baje la imagen.
+        function measure(item) {
+            item.w = item.el.getBoundingClientRect().width;
+            return item;
+        }
+
+        function totalWidth() {
+            return items.reduce(function(sum, it) { return sum + it.w + GAP; }, 0);
+        }
+
+        function fill() {
+            const viewport = filmstrip.clientWidth;
+            let guard = 0;
+            while (origin + totalWidth() < pos + viewport + BUFFER && guard++ < 50) {
+                const item = makeItem(draw());
+                track.appendChild(item.el);
+                items.push(measure(item));
+            }
+            // Agrega por la izquierda si el visitante arrastro hacia atras
+            guard = 0;
+            while (origin > pos - BUFFER && guard++ < 50) {
+                const item = makeItem(draw());
+                track.insertBefore(item.el, track.firstChild);
+                items.unshift(measure(item));
+                origin -= item.w + GAP;
+            }
+        }
+
+        function recycle() {
+            while (items.length > 2 && origin + items[0].w + GAP <= pos - BUFFER) {
+                origin += items[0].w + GAP;
+                items.shift().el.remove();
+            }
+            const viewport = filmstrip.clientWidth;
+            while (items.length > 2 &&
+                   origin + totalWidth() - (items[items.length - 1].w + GAP) > pos + viewport + BUFFER) {
+                items.pop().el.remove();
+            }
+        }
+
+        function frame() {
+            if (!dragging) {
+                // La pausa frena el avance automatico, pero deja que la inercia
+                // del ultimo arrastre termine de deslizarse suavemente.
+                const auto = (hovering || lightboxOpen || reduceMotion) ? 0 : BASE_SPEED;
+                pos += auto + momentum;
+                momentum *= FRICTION;
+                if (Math.abs(momentum) < 0.05) momentum = 0;
+            }
+            fill();
+            recycle();
+            track.style.transform = 'translate3d(' + -(pos - origin) + 'px,0,0)';
+            requestAnimationFrame(frame);
+        }
+
+        // Arrastre con mouse y dedo
+        let dragging = false;
+        let lastX = 0, travelled = 0, lastMoveTime = 0;
+        let pressed = null;   // capturar el puntero re-dirige el pointerup al contenedor,
+                              // asi que guardamos aca la foto donde empezo el gesto
+
+        filmstrip.addEventListener('pointerdown', function(e) {
+            if (e.button !== undefined && e.button !== 0) return;
+            dragging = true;
+            travelled = 0;
+            momentum = 0;
+            lastX = e.clientX;
+            lastMoveTime = e.timeStamp;
+            pressed = e.target && e.target.dataset ? e.target.dataset.photo : null;
+            filmstrip.setPointerCapture(e.pointerId);
+            filmstrip.classList.add('is-dragging');
+        });
+
+        filmstrip.addEventListener('pointermove', function(e) {
+            if (!dragging) return;
+            const dx = lastX - e.clientX;
+            const dt = Math.max(1, e.timeStamp - lastMoveTime);
+            pos += dx;
+            travelled += Math.abs(dx);
+            momentum = dx / dt * 16;   // px por frame de 16ms
+            lastX = e.clientX;
+            lastMoveTime = e.timeStamp;
+        });
+
+        function endDrag(e) {
+            if (!dragging) return;
+            dragging = false;
+            filmstrip.classList.remove('is-dragging');
+            if (e && e.pointerId !== undefined && filmstrip.hasPointerCapture(e.pointerId)) {
+                filmstrip.releasePointerCapture(e.pointerId);
+            }
+            // Si apenas se movio, fue un click: abrir la foto
+            if (travelled < TAP_SLOP && pressed) openLightbox(pressed, photos);
+            pressed = null;
+        }
+        filmstrip.addEventListener('pointerup', endDrag);
+        filmstrip.addEventListener('pointercancel', endDrag);
+
+        // Pausa al pasar el mouse por encima, para poder hacer click comodo
+        filmstrip.addEventListener('pointerenter', function(e) {
+            if (e.pointerType === 'mouse') hovering = true;
+        });
+        filmstrip.addEventListener('pointerleave', function(e) {
+            if (e.pointerType === 'mouse') hovering = false;
+        });
+
+        window.addEventListener('resize', function() { items.forEach(measure); });
+
+        requestAnimationFrame(frame);
+    }
+
+    document.querySelectorAll('.filmstrip').forEach(initFilmstrip);
 })();
 
 console.log('🎭 Oz, el Secreto de la Ciudad Esmeralda — loaded');

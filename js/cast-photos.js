@@ -1,6 +1,9 @@
-/* Manifiesto de fotos del elenco para el carrusel.
-   Para agregar fotos: corre tools/process-cast-photos.py y pega aca las lineas que imprime.
-   n = nombre del archivo (sin .jpg) | w,h = tamano real | full: true si existe -full.jpg */
+/* Fotos del carrusel. Dos grupos separados porque son dos estilos distintos:
+   CAST_PHOTOS  = retratos de personajes en estudio, fondo blanco
+   SCENE_PHOTOS = fotos de funcion sobre el escenario
+   Para agregar: corre tools/process-cast-photos.py y pega las lineas que imprime
+   en el grupo que corresponda. n = archivo sin .jpg | w,h = tamano | full = existe -full.jpg */
+
 window.CAST_PHOTOS = [
     { n: 'cast-2', w: 532, h: 800 },
     { n: 'cast-15', w: 532, h: 800 },
@@ -26,6 +29,9 @@ window.CAST_PHOTOS = [
     { n: 'cast-86', w: 532, h: 800, full: true },
     { n: 'cast-89', w: 532, h: 800, full: true },
     { n: 'cast-104', w: 532, h: 800, full: true },
+];
+
+window.SCENE_PHOTOS = [
     { n: 'cast-105', w: 1202, h: 800, full: true },
     { n: 'cast-106', w: 1198, h: 800, full: true },
     { n: 'cast-107', w: 1198, h: 800, full: true },
