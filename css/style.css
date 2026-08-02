@@ -298,15 +298,6 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     padding: calc(70px + clamp(2rem, 6vh, 4rem)) 0 clamp(3rem, 8vh, 6rem);
 }
 .gallery-block { margin-top: clamp(2rem, 5vh, 3.5rem); }
-.gallery-heading {
-    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-    color: var(--gold);
-    text-align: center;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-}
-.gallery-cta { text-align: center; margin-top: clamp(2rem, 5vh, 3.5rem); }
 .nav-link--active { color: var(--gold); }
 
 /* En la pagina de fotos el carrusel ocupa mucho mas alto */
@@ -1355,7 +1346,7 @@ body.lightbox-open { overflow: hidden; }
 .clearfix { clear: both; }
 
 /* Sponsors */
-.sponsors { max-width: 800px; margin: 2.5rem auto 0; text-align: center; }
+.sponsors { max-width: 800px; margin: 5rem auto 0; text-align: center; }
 .sponsors-label { color: rgba(255,255,255,0.5); font-style: italic; margin-bottom: 1rem; }
 .sponsors-logos { display: flex; gap: 2.5rem; justify-content: center; align-items: center; flex-wrap: wrap; }
 .sponsor-logo { max-height: 70px; max-width: 160px; width: auto; height: auto; object-fit: contain; }
