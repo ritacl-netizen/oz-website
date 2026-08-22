@@ -172,6 +172,53 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     background-position: center center;
     background-repeat: no-repeat;
 }
+
+/* === HERO — VARIANTE B (A/B test: key art con elenco) ===
+   El elenco ocupa el centro de la imagen, así que el logo baja
+   para apoyarse sobre ellos y el camino, estilo póster. */
+[data-hero="b"] .hero {
+    /* fallback para navegadores sin image-set */
+    background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0) 42%, rgba(0,0,0,0.34) 68%, rgba(0,0,0,0.72) 100%),
+        radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 55%, rgba(0,0,0,0.45) 100%),
+        url('../images/hero-bg-elenco.jpg');
+    background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0) 42%, rgba(0,0,0,0.34) 68%, rgba(0,0,0,0.72) 100%),
+        radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 55%, rgba(0,0,0,0.45) 100%),
+        image-set(url('../images/hero-bg-elenco.webp') type('image/webp'),
+                  url('../images/hero-bg-elenco.jpg') type('image/jpeg'));
+    /* Sobredimensiona y ancla abajo: sube al elenco y deja el camino libre
+       para el logo y el CTA. Los degradados van a tamaño completo. */
+    background-size: 100% 100%, 100% 100%, auto 118%;
+    background-position: center, center, center bottom;
+    align-items: flex-end;
+    padding-bottom: 64px;
+}
+[data-hero="b"] .hero-pre {
+    position: absolute;
+    top: 92px;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0 24px;
+}
+[data-hero="b"] .hero-logo-oz {
+    max-width: clamp(230px, 34vw, 370px);
+    filter: drop-shadow(0 6px 28px rgba(0,0,0,0.55));
+}
+[data-hero="b"] .hero-title { margin-bottom: 1rem; }
+[data-hero="b"] .hero-date { margin-bottom: 1.75rem; }
+/* En viewport angosto el recorte vertical ya sube al elenco: sin sobredimensionar,
+   así entra el grupo completo (León y Hombre de Hojalata incluidos). */
+@media (max-width: 768px) {
+    [data-hero="b"] .hero {
+        background-size: 100% 100%, 100% 100%, cover;
+        background-position: center, center, center center;
+    }
+    [data-hero="b"] .hero-pre { top: 76px; font-size: .8rem; }
+    [data-hero="b"] .hero-logo-oz { max-width: clamp(200px, 52vw, 300px); }
+}
+
 .hero-content { z-index: 2; max-width: 860px; padding: 0 24px; }
 .hero-pre {
     font-size: 1rem;

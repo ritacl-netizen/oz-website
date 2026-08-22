@@ -1,8 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- v20260701f -->
+    <!-- v20260822a -->
     <meta charset="UTF-8">
+    <!-- A/B test hero: asigna variante antes del render (evita flash) y antes de GA -->
+    <script>
+    (function() {
+        var KEY = 'oz_hero_variant';
+        var v;
+        try { v = localStorage.getItem(KEY); } catch (e) {}
+        // Forzar variante para QA: ?hero=a  o  ?hero=b
+        var forced = (location.search.match(/[?&]hero=(a|b)/i) || [])[1];
+        if (forced) { v = forced.toLowerCase(); }
+        if (v !== 'a' && v !== 'b') {
+            v = Math.random() < 0.5 ? 'a' : 'b';
+            try { localStorage.setItem(KEY, v); } catch (e) {}
+        }
+        document.documentElement.setAttribute('data-hero', v);
+        // Las visitas forzadas se reportan como "qa" para no ensuciar el experimento
+        window.OZ_HERO_VARIANT = forced ? 'qa_' + v : v;
+    })();
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9RL55PNGGQ"></script>
     <script>
@@ -10,7 +28,11 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
+      // Adjunta la variante a TODOS los eventos + como user property para segmentar
+      gtag('set', { hero_variant: window.OZ_HERO_VARIANT });
+      gtag('set', 'user_properties', { hero_variant: window.OZ_HERO_VARIANT });
       gtag('config', 'G-9RL55PNGGQ');
+      gtag('event', 'hero_variant_view', { hero_variant: window.OZ_HERO_VARIANT });
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="favicon.png?v=20260422">
@@ -35,14 +57,24 @@
     <meta name="twitter:description" content="De los creadores de Alicia y Peter Pan. Musical inmersivo para toda la familia. Montevideo 2026.">
     <meta name="twitter:image" content="https://ozelmusical.com/images/og-image.jpg?v=20260525">
 
-    <!-- Preload hero images for faster LCP -->
+    <!-- Preload hero images for faster LCP (solo la del fondo de la variante activa) -->
     <link rel="preload" as="image" href="images/hero-oz-completo.png">
-    <link rel="preload" as="image" href="images/hero-bg-emerald.png">
+    <script>
+    (function() {
+        var b = document.documentElement.getAttribute('data-hero') === 'b';
+        var webp = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0;
+        var l = document.createElement('link');
+        l.rel = 'preload'; l.as = 'image';
+        l.href = b ? (webp ? 'images/hero-bg-elenco.webp' : 'images/hero-bg-elenco.jpg')
+                   : 'images/hero-bg-emerald.png';
+        document.head.appendChild(l);
+    })();
+    </script>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css?v=20260812h">
+    <link rel="stylesheet" href="css/style.css?v=20260822a">
 </head>
 <body>
     <!-- Navigation -->
