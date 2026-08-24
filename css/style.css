@@ -218,10 +218,29 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
         background-size: 100% 100%, 100% 100%, auto 110%;
         background-position: center, center, center bottom;
     }
-    [data-hero="b"] .hero-pre { top: 76px; font-size: .8rem; }
+    /* El texto queda sobre los sombreros del elenco: sombra para que se lea */
+    [data-hero="b"] .hero-pre {
+        top: 76px;
+        font-size: .8rem;
+        text-shadow: 0 2px 14px rgba(0,0,0,.85), 0 0 4px rgba(0,0,0,.6);
+    }
     [data-hero="b"] .hero-logo-oz { max-width: clamp(180px, 44vw, 260px); }
     [data-hero="b"] .hero-venue { font-size: .9rem; }
     [data-hero="b"] .hero-date { margin-bottom: 1.25rem; }
+}
+
+/* Pantallas bajas (iPhone SE y similares): no hay alto suficiente para el
+   elenco y el bloque de texto completo, asi que se saca la linea del
+   espectaculo, se sube un poco mas la imagen y se afloja el interlineado. */
+@media (max-width: 768px) and (max-height: 720px) {
+    [data-hero="b"] .hero {
+        background-size: 100% 100%, 100% 100%, auto 118%;
+    }
+    [data-hero="b"] .hero-venue-tagline { display: none; }
+    [data-hero="b"] .hero-logo-oz { max-width: clamp(170px, 42vw, 240px); }
+    [data-hero="b"] .hero-title { margin-bottom: 1.25rem; }
+    [data-hero="b"] .hero-venue { margin-bottom: .65rem; }
+    [data-hero="b"] .hero-pre { font-size: .75rem; }
 }
 
 .hero-content { z-index: 2; max-width: 860px; padding: 0 24px; }
