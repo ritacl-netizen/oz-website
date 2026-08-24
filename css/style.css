@@ -208,15 +208,20 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 }
 [data-hero="b"] .hero-title { margin-bottom: 1rem; }
 [data-hero="b"] .hero-date { margin-bottom: 1.75rem; }
-/* En viewport angosto el recorte vertical ya sube al elenco: sin sobredimensionar,
-   así entra el grupo completo (León y Hombre de Hojalata incluidos). */
+/* En celular la imagen es 16:9 contra una pantalla vertical, asi que con "cover"
+   queda justo del alto del viewport: no sobra nada arriba ni abajo y
+   background-position no puede correrla. Por eso el logo caia sobre las caras de
+   Dorothy y el Espantapajaros. Se agranda un 10% y se ancla abajo para subir al
+   elenco, y se compacta el bloque de texto para darle aire al logo. */
 @media (max-width: 768px) {
     [data-hero="b"] .hero {
-        background-size: 100% 100%, 100% 100%, cover;
-        background-position: center, center, center center;
+        background-size: 100% 100%, 100% 100%, auto 110%;
+        background-position: center, center, center bottom;
     }
     [data-hero="b"] .hero-pre { top: 76px; font-size: .8rem; }
-    [data-hero="b"] .hero-logo-oz { max-width: clamp(200px, 52vw, 300px); }
+    [data-hero="b"] .hero-logo-oz { max-width: clamp(180px, 44vw, 260px); }
+    [data-hero="b"] .hero-venue { font-size: .9rem; }
+    [data-hero="b"] .hero-date { margin-bottom: 1.25rem; }
 }
 
 .hero-content { z-index: 2; max-width: 860px; padding: 0 24px; }
