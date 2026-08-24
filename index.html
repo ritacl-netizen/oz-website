@@ -3,17 +3,22 @@
 <head>
     <!-- v20260822a -->
     <meta charset="UTF-8">
-    <!-- A/B test hero: asigna variante antes del render (evita flash) y antes de GA -->
+    <!-- Hero: B ganó el A/B del 22-ago (+58,7% de clics, 99,996% de confianza).
+         Queda fija para el 95% del tráfico; el 5% restante sigue viendo A como
+         grupo de control, para detectar si el resultado se sostiene.
+         El sufijo _v2 de la clave reasigna a todos: sin eso, los visitantes que
+         ya tenían "a" guardado seguirían viéndola y el control sería ~11%, no 5%. -->
     <script>
     (function() {
-        var KEY = 'oz_hero_variant';
+        var KEY = 'oz_hero_variant_v2';
+        var CONTROL = 0.05; // proporción que ve la variante A
         var v;
         try { v = localStorage.getItem(KEY); } catch (e) {}
         // Forzar variante para QA: ?hero=a  o  ?hero=b
         var forced = (location.search.match(/[?&]hero=(a|b)/i) || [])[1];
         if (forced) { v = forced.toLowerCase(); }
         if (v !== 'a' && v !== 'b') {
-            v = Math.random() < 0.5 ? 'a' : 'b';
+            v = Math.random() < CONTROL ? 'a' : 'b';
             try { localStorage.setItem(KEY, v); } catch (e) {}
         }
         document.documentElement.setAttribute('data-hero', v);
