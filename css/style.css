@@ -155,28 +155,18 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 .nav-toggle { display: none; flex-direction: column; cursor: pointer; }
 .bar { width: 24px; height: 2px; background: #fff; margin: 3px 0; transition: .3s; }
 
-/* === HERO === */
+/* === HERO ===
+   Key art con el elenco: ocupa el centro de la imagen, así que el logo baja
+   para apoyarse sobre ellos y el camino, estilo póster. */
 .hero {
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     position: relative;
     text-align: center;
     overflow: hidden;
-    padding: 100px 0 60px;
-    background-image:
-        radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.5) 100%),
-        url('../images/hero-bg-emerald.png');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-
-/* === HERO — VARIANTE B (A/B test: key art con elenco) ===
-   El elenco ocupa el centro de la imagen, así que el logo baja
-   para apoyarse sobre ellos y el camino, estilo póster. */
-[data-hero="b"] .hero {
+    padding: 100px 0 64px;
     /* fallback para navegadores sin image-set */
     background-image:
         linear-gradient(to bottom, rgba(0,0,0,0) 42%, rgba(0,0,0,0.34) 68%, rgba(0,0,0,0.72) 100%),
@@ -191,77 +181,25 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
        para el logo y el CTA. Los degradados van a tamaño completo. */
     background-size: 100% 100%, 100% 100%, auto 118%;
     background-position: center, center, center bottom;
-    align-items: flex-end;
-    padding-bottom: 64px;
+    background-repeat: no-repeat;
 }
-[data-hero="b"] .hero-pre {
+
+.hero-content { z-index: 2; max-width: 860px; padding: 0 24px; }
+.hero-pre {
     position: absolute;
     top: 92px;
     left: 0;
     right: 0;
     margin: 0;
     padding: 0 24px;
-}
-[data-hero="b"] .hero-logo-oz {
-    max-width: clamp(230px, 34vw, 370px);
-    filter: drop-shadow(0 6px 28px rgba(0,0,0,0.55));
-}
-[data-hero="b"] .hero-title { margin-bottom: 1rem; }
-[data-hero="b"] .hero-date { margin-bottom: 1.75rem; }
-/* En celular la imagen es 16:9 contra una pantalla vertical, asi que con "cover"
-   queda justo del alto del viewport: no sobra nada arriba ni abajo y
-   background-position no puede correrla. Por eso el logo caia sobre las caras de
-   Dorothy y el Espantapajaros. Se agranda un 10% y se ancla abajo para subir al
-   elenco, y se compacta el bloque de texto para darle aire al logo. */
-@media (max-width: 768px) {
-    [data-hero="b"] .hero {
-        background-size: 100% 100%, 100% 100%, auto 110%;
-        background-position: center, center, center bottom;
-    }
-    /* El texto queda sobre los sombreros del elenco: sombra para que se lea */
-    [data-hero="b"] .hero-pre {
-        top: 76px;
-        font-size: .8rem;
-        text-shadow: 0 2px 14px rgba(0,0,0,.85), 0 0 4px rgba(0,0,0,.6);
-    }
-    [data-hero="b"] .hero-logo-oz { max-width: clamp(180px, 44vw, 260px); }
-    [data-hero="b"] .hero-venue { font-size: .9rem; }
-    [data-hero="b"] .hero-date { margin-bottom: 1.25rem; }
-}
-
-/* Pantallas bajas (iPhone SE y similares): no hay alto suficiente para el
-   elenco y el bloque de texto completo, asi que se saca la linea del
-   espectaculo, se sube un poco mas la imagen y se afloja el interlineado. */
-@media (max-width: 768px) and (max-height: 720px) {
-    [data-hero="b"] .hero {
-        background-size: 100% 100%, 100% 100%, auto 118%;
-    }
-    [data-hero="b"] .hero-venue-tagline { display: none; }
-    [data-hero="b"] .hero-logo-oz { max-width: clamp(170px, 42vw, 240px); }
-    [data-hero="b"] .hero-title { margin-bottom: 1.25rem; }
-    [data-hero="b"] .hero-venue { margin-bottom: .65rem; }
-    [data-hero="b"] .hero-pre { font-size: .75rem; }
-    /* La fecha ocupa dos lineas aca: se achica para no empujar el logo
-       sobre las caras del elenco. */
-    [data-hero="b"] .hero-date {
-        font-size: .95rem;
-        line-height: 1.3;
-        letter-spacing: .1em;
-        margin-bottom: 1rem;
-    }
-}
-
-.hero-content { z-index: 2; max-width: 860px; padding: 0 24px; }
-.hero-pre {
     font-size: 1rem;
     letter-spacing: .2em;
     text-transform: uppercase;
     color: rgba(212, 175, 55, 0.75);
-    margin-bottom: 1.5rem;
     animation: fadeUp 1s ease .3s both;
 }
 .hero-pre em { color: var(--emerald); font-style: normal; }
-.hero-title { margin-bottom: 1.5rem; line-height: 1; }
+.hero-title { margin-bottom: 1rem; line-height: 1; }
 .hero-logo {
     display: block;
     width: auto;
@@ -270,7 +208,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     margin: 0 auto;
 }
 .hero-logo-oz {
-    max-width: clamp(320px, 65vw, 680px);
+    max-width: clamp(230px, 34vw, 370px);
+    filter: drop-shadow(0 6px 28px rgba(0,0,0,0.55));
     animation: fadeUp 1s ease .5s both;
 }
 .hero-venue {
@@ -286,10 +225,55 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
     font-family: 'Cinzel', serif;
     font-weight: 600;
     letter-spacing: .15em;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.75rem;
     animation: fadeUp 1s ease 1.2s both;
 }
 .btn-hero { animation: fadeUp 1s ease 1.4s both; }
+
+/* En celular la imagen es 16:9 contra una pantalla vertical, asi que con "cover"
+   queda justo del alto del viewport: no sobra nada arriba ni abajo y
+   background-position no puede correrla. Por eso el logo caia sobre las caras de
+   Dorothy y el Espantapajaros. Se agranda un 10% y se ancla abajo para subir al
+   elenco, y se compacta el bloque de texto para darle aire al logo.
+   Estas media queries van despues de las reglas base a proposito: tienen la
+   misma especificidad, asi que gana la que viene ultima. */
+@media (max-width: 768px) {
+    .hero {
+        background-size: 100% 100%, 100% 100%, auto 110%;
+        background-position: center, center, center bottom;
+    }
+    /* El texto queda sobre los sombreros del elenco: sombra para que se lea */
+    .hero-pre {
+        top: 76px;
+        font-size: .8rem;
+        text-shadow: 0 2px 14px rgba(0,0,0,.85), 0 0 4px rgba(0,0,0,.6);
+    }
+    .hero-logo-oz { max-width: clamp(180px, 44vw, 260px); }
+    .hero-venue { font-size: .9rem; }
+    .hero-date { margin-bottom: 1.25rem; }
+}
+
+/* Pantallas bajas (iPhone SE y similares): no hay alto suficiente para el
+   elenco y el bloque de texto completo, asi que se saca la linea del
+   espectaculo, se sube un poco mas la imagen y se afloja el interlineado. */
+@media (max-width: 768px) and (max-height: 720px) {
+    .hero {
+        background-size: 100% 100%, 100% 100%, auto 118%;
+    }
+    .hero-venue-tagline { display: none; }
+    .hero-logo-oz { max-width: clamp(170px, 42vw, 240px); }
+    .hero-title { margin-bottom: 1.25rem; }
+    .hero-venue { margin-bottom: .65rem; }
+    .hero-pre { font-size: .75rem; }
+    /* La fecha ocupa dos lineas aca: se achica para no empujar el logo
+       sobre las caras del elenco. */
+    .hero-date {
+        font-size: .95rem;
+        line-height: 1.3;
+        letter-spacing: .1em;
+        margin-bottom: 1rem;
+    }
+}
 
 .hero-scroll-hint {
     position: absolute;
