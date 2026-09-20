@@ -230,6 +230,79 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
 }
 .btn-hero { animation: fadeUp 1s ease 1.4s both; }
 
+/* === STICKER DE PROMO (redondel rojo, cuadrante superior derecho) === */
+.promo-sticker {
+    position: absolute;
+    top: clamp(96px, 13vh, 140px);
+    right: clamp(18px, 5vw, 76px);
+    z-index: 3;
+    width: 148px;
+    height: 148px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 26%, #ef5350 0%, #c62828 55%, #8e1515 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .5), inset 0 -8px 20px rgba(0, 0, 0, .25);
+    /* Entra con un pop despues de la animacion del hero y queda oscilando */
+    animation: stickerPop .55s cubic-bezier(.34, 1.56, .64, 1) 1.7s both,
+               stickerBob 3.6s ease-in-out 2.25s infinite;
+    transition: box-shadow .3s ease;
+}
+.promo-sticker::before {
+    content: '';
+    position: absolute;
+    inset: 7px;
+    border: 2px dashed rgba(255, 255, 255, .6);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.promo-sticker:hover {
+    box-shadow: 0 14px 40px rgba(0, 0, 0, .6), 0 0 34px rgba(239, 83, 80, .55),
+                inset 0 -8px 20px rgba(0, 0, 0, .25);
+}
+.promo-sticker-label {
+    font-size: .62rem;
+    font-weight: 800;
+    line-height: 1.25;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    opacity: .95;
+}
+.promo-sticker-pct {
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 2.1rem;
+    line-height: 1;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, .35);
+}
+.promo-sticker-code {
+    margin-top: 4px;
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .05em;
+    background: rgba(255, 255, 255, .94);
+    color: #8e1515;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+@keyframes stickerPop {
+    from { transform: rotate(-32deg) scale(0); opacity: 0; }
+    to   { transform: rotate(10deg) scale(1); opacity: 1; }
+}
+@keyframes stickerBob {
+    0%, 100% { transform: rotate(10deg) translateY(0); }
+    50%      { transform: rotate(6deg) translateY(-7px); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .promo-sticker { animation: none; transform: rotate(10deg); }
+}
+
 /* En celular la imagen es 16:9 contra una pantalla vertical, asi que con "cover"
    queda justo del alto del viewport: no sobra nada arriba ni abajo y
    background-position no puede correrla. Por eso el logo caia sobre las caras de
@@ -254,6 +327,19 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; font-weight: 600; }
        hasta en pantallas de 360px de ancho: a 1.15rem se parte y el bloque pasa
        a tres lineas, que empuja el logo sobre las caras del elenco. */
     .hero-date { font-size: 1rem; margin-bottom: 1.25rem; }
+    /* Sticker mas chico y bien arriba a la derecha, sobre el cielo verde:
+       mas abajo tapa la cara del Hombre de Hojalata */
+    .promo-sticker {
+        top: 102px;
+        right: 8px;
+        width: 96px;
+        height: 96px;
+        gap: 1px;
+    }
+    .promo-sticker::before { inset: 5px; }
+    .promo-sticker-label { font-size: .44rem; letter-spacing: .1em; }
+    .promo-sticker-pct { font-size: 1.3rem; }
+    .promo-sticker-code { font-size: .52rem; padding: 2px 6px; margin-top: 2px; }
 }
 
 /* Pantallas bajas (iPhone SE y similares): no hay alto suficiente para el
